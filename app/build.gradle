@@ -29,5 +29,9 @@ dependencies {
     //Butter knife
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    // Thu vien password view
+    compile 'com.xwray:passwordview:1.0'
+    // Thu vien Circle ImageView
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
 }
