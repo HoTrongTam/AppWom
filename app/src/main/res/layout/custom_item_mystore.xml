@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <ImageView
+        android:src="@mipmap/iphone"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="0.5"
+        android:layout_width="match_parent"
+       android:layout_marginTop="12dp"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/txtTensp_mystore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iphone 6 vàng" />
+
+        <TextView
+            android:id="@+id/txtGia_mystore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1600000" />
+
+        <TextView
+            android:id="@+id/txtTenshop_mystore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cửa hàng điện thoại di động tuy hòa" />
+    </LinearLayout>
+</LinearLayout>
+
+</LinearLayout>
