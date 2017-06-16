@@ -1,13 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.wom.appwom.DetailsFragment">
+    tools:context="com.example.wom.appwom.DetailsFragment"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imgSp"
@@ -16,46 +13,55 @@
             android:padding="5dp"
             android:src="@mipmap/iphone" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txtGiaban_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Giá bán: 1600000"
+                android:layout_below="@+id/imgSp"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/trangthai_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:padding="5dp"
+                android:text="Trạng thái: còn bán"
+                android:layout_below="@+id/txtGiaban_details"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/loaisp_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:padding="5dp"
+                android:text="Loại sản phẩm: Điện thoại"
+                android:layout_below="@+id/trangthai_details"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/mota_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:padding="5dp"
+                android:text="Mô tả: ........................................"
+                android:layout_below="@+id/loaisp_details"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/btnDatmua_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:text="Đặt mua"
+                android:layout_below="@+id/mota_details"
+                android:layout_centerHorizontal="true" />
 
 
-    <TextView
-        android:id="@+id/txtGiaban_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        android:text="Giá bán: 1600000" />
 
-    <TextView
-        android:id="@+id/trangthai_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        android:text="Trạng thái: còn bán" />
-
-    <TextView
-        android:id="@+id/loaisp_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        android:text="Loại sản phẩm: Điện thoại" />
-
-    <TextView
-        android:id="@+id/mota_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        android:text="Mô tả: ........................................" />
-
-    <Button
-        android:id="@+id/btnDatmua_details"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Đặt mua"/>
-</FrameLayout>
+</RelativeLayout>
