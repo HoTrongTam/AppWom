@@ -179,13 +179,21 @@ public class DangNhapActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            Toast(""+accList);
-//            Toast(accList.get(0).get("email"));
-//            for (int i = 0; i < accList.size();i++){
-//                if (accList.get(i).get("email")==username){
-//
-//                }
-//            }
+            String user = edtUser.getText().toString();
+            String matkhau = edtMatKhau.getText().toString();
+
+            for (int i = 0; i < accList.size();i++){
+                if (accList.get(i).get("email").equals(user) && accList.get(i).get("matkhau").equals(matkhau)){
+                    Toast("Đăng nhập thành công");
+                    // đăng nhập thành công chuyển vào Trang Home
+                    Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                    mProgress.dismiss();
+                    return;
+                }
+            }
+            Toast("Sai thông tin đăng nhập");
             mProgress.dismiss();
         }
     }
