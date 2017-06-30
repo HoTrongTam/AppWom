@@ -22,7 +22,7 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterStoreActivity" />
         <activity android:name=".DangNhapActivity">
             <intent-filter>
@@ -31,6 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DangKyActivity" />
+        <activity android:name=".QuenMatKhauActivity"></activity>
     </application>
 
 </manifest>

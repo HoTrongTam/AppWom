@@ -89,7 +89,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btnDangNhap ,R.id.btnNhapLai})
+    @OnClick({R.id.btnDangNhap ,R.id.btnNhapLai, R.id.txtQuenMatKhau, R.id.txtTaoTaiKhoan})
     public void submit(Button button) {
         String user = edtUser.getText().toString();
         String pass = edtMatKhau.getText().toString();
@@ -108,6 +108,10 @@ public class DangNhapActivity extends AppCompatActivity {
         } else if (button.getId() == R.id.btnNhapLai){
             edtUser.setText(null);
             edtMatKhau.setText(null);
+        }else if(button.getId() == R.id.txtTaoTaiKhoan){
+            Toast("aaaa");
+        }else if (button.getId() == R.id.txtQuenMatKhau){
+
         }
     }
     /* Toast ở trang Đăng nhập*/
@@ -130,6 +134,7 @@ public class DangNhapActivity extends AppCompatActivity {
         }
         editor.commit();
     }
+    // lấy thông tin SharedPreferences để đưa lên Edittext
     public void layThongTin() {
         SharedPreferences pref = getPreferences(MODE_PRIVATE);
         boolean chk = pref.getBoolean("savestatus", false);
