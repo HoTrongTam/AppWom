@@ -3,6 +3,7 @@ package com.example.wom.appwom;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -102,19 +103,46 @@ public class DangNhapActivity extends AppCompatActivity {
              Toast("Không được bỏ trống mật khẩu đăng nhập");
                 return;
             }else {
-                new GetContacts().execute();
+                new GetAccounts().execute();
             }
         } else if (button.getId() == R.id.btnNhapLai){
             edtUser.setText(null);
             edtMatKhau.setText(null);
         }
     }
-
+    /* Toast ở trang Đăng nhập*/
     private void Toast(String toast){
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
     }
 
-    private class GetContacts extends AsyncTask<Void, Void, Void> {
+    /* Lưu thông tin đăng nhập*/
+    public void luuThongTin() {
+        SharedPreferences sharedpreference = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreference.edit();
+        String taikhoan = edtUser.getText().toString();
+        String matkhau = edtMatKhau.getText().toString();
+        if (!chkLuuMatKhau.isChecked()) {
+            editor.clear();
+        } else {
+            editor.putString("tk", taikhoan);
+            editor.putString("mk", matkhau);
+            editor.putBoolean("savestatus", chkLuuMatKhau.isChecked());
+        }
+        editor.commit();
+    }
+    public void layThongTin() {
+        SharedPreferences pref = getPreferences(MODE_PRIVATE);
+        boolean chk = pref.getBoolean("savestatus", false);
+        if (chk) {
+            String taikhoan = pref.getString("tk", "");
+            String matkhau = pref.getString("mk", "");
+            edtUser.setText(taikhoan);
+            edtMatKhau.setText(matkhau);
+
+        }
+        chkLuuMatKhau.setChecked(chk);
+    }
+    private class GetAccounts extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -128,25 +156,25 @@ public class DangNhapActivity extends AppCompatActivity {
 
             String jsonStr = sh.makeServiceCall(URL_Login);
 
-           // Log.e(TAG, "Response from url: " + jsonStr);
+           // Log.e(TAG, "Kiểm tra url: " + jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    JSONArray contacts = jsonObj.getJSONArray("taikhoan");
+                    JSONArray taikhoan = jsonObj.getJSONArray("taikhoan");
                     // looping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
+                    for (int i = 0; i < taikhoan.length(); i++) {
+                        JSONObject c = taikhoan.getJSONObject(i);
                         String id = c.getString("id_tk");
                         String matkhau = c.getString("matkhau");
                         String email = c.getString("email");
 
-                        HashMap<String, String> contact = new HashMap<>();
+                        HashMap<String, String> account = new HashMap<>();
 
-                        contact.put("id", id);
-                        contact.put("matkhau", matkhau);
-                        contact.put("email", email);
+                        account.put("id", id);
+                        account.put("matkhau", matkhau);
+                        account.put("email", email);
 
-                        accList.add(contact);
+                        accList.add(account);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Kết nối bị lỗi: " + e.getMessage());
@@ -188,6 +216,7 @@ public class DangNhapActivity extends AppCompatActivity {
                     // đăng nhập thành công chuyển vào Trang Home
                     Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
                     startActivity(intent);
+                    luuThongTin();
                     finish();
                     mProgress.dismiss();
                     return;
@@ -196,5 +225,11 @@ public class DangNhapActivity extends AppCompatActivity {
             Toast("Sai thông tin đăng nhập");
             mProgress.dismiss();
         }
+    }
+    /*Lưu thông tin đăng nhập*/
+    @Override
+    protected void onResume() {
+        layThongTin();
+        super.onResume();
     }
 }
