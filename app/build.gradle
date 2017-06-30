@@ -28,15 +28,15 @@ dependencies {
     })
 
     compile files('libs/jtds-1.2.7.jar')
+    // Butter knife
+    // Thu vien password view
+    // Thu vien Circle ImageView
+    // Thu vien picasso dung de load anh
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    //Butter knife
     compile 'com.jakewharton:butterknife:8.4.0'
-    // Thu vien password view
     compile 'com.xwray:passwordview:1.0'
-    // Thu vien Circle ImageView
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    // Thu vien picasso dung de load anh
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
