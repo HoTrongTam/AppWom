@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private @BindView(R.id.viewlipper)
+    @BindView(R.id.viewlipper)
     ViewFlipper viewFlipper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
