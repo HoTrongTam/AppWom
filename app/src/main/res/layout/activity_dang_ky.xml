@@ -1,227 +1,49 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="6dp"
-    android:fillViewport="false">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <android.support.design.widget.TextInputLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edtHoTen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Họ tên"
-                android:imeOptions="actionUnspecified"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Giới tính" />
-
-        <LinearLayout
-            android:layout_width="164dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <RadioGroup
-                android:id="@+id/rdGroup"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/tab1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:checkedButton="@+id/rdNam">
-
-                <RadioButton
-                    android:id="@+id/rdNam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2.32"
-                    android:text="Nam" />
-
-                <RadioButton
-                    android:id="@+id/rdNu"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Nữ" />
-
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:text="Ngày sinh:" />
-
-            <TextView
-                android:id="@+id/txtNgaySinh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="#f00"
-                android:layout_weight="1"
-                android:text="2017-01-01" />
-
-            <Button
-                android:id="@+id/btndate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chọn Ngày" />
-
-        </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edtMatKhauDK"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Mật khẩu"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/edtMatKhauDK_NhapLai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Xác nhận mật khẩu"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imgAnhDaiDienDK"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:src="@mipmap/ic_launcher"
-            app:civ_border_color="#FF000000"/>
-        <TextView
-            android:id="@+id/txtAvatarDK"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="Ảnh đại diện"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/txtMaXacNhanDK"
-            android:textColor="#f00"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edtMaXacNhanDK"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Mã Xác Nhận"
-                android:imeOptions="actionUnspecified"
-                android:maxLines="1"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:background="#006df0"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/btnDangKy"
-                    style="?android:attr/buttonStyleSmall"
+                android:orientation="vertical">
+                <include
+                    layout="@layout/tab_dangky1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:text="Đăng ký"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
-            <FrameLayout
+            <LinearLayout
+                android:id="@+id/tab2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#006df0"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible">
 
-                <Button
-                    android:id="@+id/btnNhapLaiDK"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:text="Nhập lại"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
-        </LinearLayout>
+                <include layout="@layout/tab_dangky2" />
+            </LinearLayout>
+        </FrameLayout>
+
+
     </LinearLayout>
-
-</ScrollView>
+</android.support.constraint.ConstraintLayout>

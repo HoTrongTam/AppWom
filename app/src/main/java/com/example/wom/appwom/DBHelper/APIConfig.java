@@ -10,6 +10,7 @@ import java.security.SecureRandom;
 public class APIConfig {
     public static final String locahost = "192.168.1.9";
     public static final String URL_Login = "http://"+locahost+":8081/WOM/getTaiKhoan.php";
+    public static final String URL_getTaikhoan = "http://"+locahost+":8081/WOM/getTaiKhoan2.php";
     public static final String URL_Register = "http://"+locahost+":8081/WOM/postTaiKhoan.php";
     public static final String URL_LoadProduct = "";
     public static final String USERNAME = "USERNAME";

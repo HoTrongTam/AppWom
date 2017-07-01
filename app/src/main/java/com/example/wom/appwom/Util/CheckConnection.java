@@ -25,7 +25,7 @@ public class CheckConnection {
 
 
         }
-        return haveConnectionWifi ||haveConnectionMobile;
+        return haveConnectionWifi || haveConnectionMobile;
     }
     public static void ShowToast_Short(Context context,String thongbao){
 
