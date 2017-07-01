@@ -25,12 +25,18 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_01;
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_02;
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_03;
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_04;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
     @BindView(R.id.viewlipper)
     ViewFlipper viewFlipper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +61,9 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Anhxa();
         ActionViewFlipper();
+
     }
 
     @Override
@@ -67,14 +75,20 @@ public class HomeActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    private void ActionViewFlipper(){
-        ArrayList<String> mangquangcao = new ArrayList<>();
-        mangquangcao.add("https://tinhte.cdnforo.com/store/2014/08/2572609_Hinh_2.jpg");
-        mangquangcao.add("https://cms.kienthuc.net.vn/zoom/1000/uploaded/nguyenvan/2016_12_07/ho/ngam-ho-ngoc-ha-cuc-quyen-ru-khi-quang-cao-dien-thoai-hinh-3.jpg");
-        mangquangcao.add("https://cdn.mediamart.vn/News/mua-vaio-rinh-qua-xperia-cung-media-mart-924201273231am.jpg");
-        mangquangcao.add("https://www.thongtincongnghe.com/stites/default/files/images/2017/1/13/img-13264204888-2.jpg");
 
-        for (int i =0;i<mangquangcao.size();i++){
+    private void Anhxa() {
+
+
+    }
+
+    private void ActionViewFlipper() {
+        ArrayList<String> mangquangcao = new ArrayList<>();
+        mangquangcao.add(QUANGCAO_01);
+        mangquangcao.add(QUANGCAO_02);
+        mangquangcao.add(QUANGCAO_03);
+        mangquangcao.add(QUANGCAO_04);
+
+        for (int i = 0; i < mangquangcao.size(); i++) {
             ImageView imageView = new ImageView(getApplicationContext());
             Picasso.with(getApplicationContext())
                     .load(mangquangcao.get(i))
@@ -84,12 +98,13 @@ public class HomeActivity extends AppCompatActivity
         }
         viewFlipper.setFlipInterval(5000);
         viewFlipper.setAutoStart(true);
-        Animation animation_slide_in_right = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_in_right);
-        Animation animation_slide_out_right = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_out_right);
+        Animation animation_slide_in_right = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_right);
+        Animation animation_slide_out_right = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_right);
         viewFlipper.setInAnimation(animation_slide_in_right);
         viewFlipper.setOutAnimation(animation_slide_out_right);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
