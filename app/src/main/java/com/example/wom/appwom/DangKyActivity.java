@@ -241,6 +241,7 @@ public class DangKyActivity extends AppCompatActivity {
         });
         requestQueue.add(jsonArrayRequest);
     }
+    // Đăng ký trên bảng TaiKhoan
     private void DangKyTaiKhoan(){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, APIConfig.URL_Register, new Response.Listener<String>() {
@@ -267,6 +268,8 @@ public class DangKyActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
+
+    // xác nhận thông tin tài khoản, điền thông tin đầy đủ cho tài khoản
     private void XacNhanDangKy(){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, APIConfig.URL_Register_Confirm, new Response.Listener<String>() {
@@ -300,7 +303,6 @@ public class DangKyActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
-
 
     @Override
     protected Dialog onCreateDialog(int id) {
