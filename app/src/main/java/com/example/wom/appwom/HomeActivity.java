@@ -18,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import com.example.wom.appwom.Util.CheckConnection;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,9 +42,26 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        ButterKnife.bind(this);
+
+        Anhxa();
+        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            ActionBar();
+            ActionViewFlipper();
+
+
+        } else {
+            CheckConnection.ShowToast_Short(getApplicationContext(),"Bạn hãy kiểm tra lại kết nối");
+            finish();
+        }
+
+
+    }
+
+    private void ActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ButterKnife.bind(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,9 +79,6 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Anhxa();
-        ActionViewFlipper();
-
     }
 
     @Override
