@@ -89,7 +89,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btnDangNhap ,R.id.btnNhapLai, R.id.txtQuenMatKhau, R.id.txtTaoTaiKhoan})
+    @OnClick({R.id.btnDangNhap ,R.id.btnNhapLai})
     public void submit(Button button) {
         String user = edtUser.getText().toString();
         String pass = edtMatKhau.getText().toString();
@@ -108,10 +108,16 @@ public class DangNhapActivity extends AppCompatActivity {
         } else if (button.getId() == R.id.btnNhapLai){
             edtUser.setText(null);
             edtMatKhau.setText(null);
-        }else if(button.getId() == R.id.txtTaoTaiKhoan){
-            Toast("aaaa");
-        }else if (button.getId() == R.id.txtQuenMatKhau){
-
+        }
+    }
+    @OnClick({R.id.txtTaoTaiKhoan, R.id.txtQuenMatKhau})
+    public void txtClick(TextView textView){
+        if (textView.getId() == R.id.txtQuenMatKhau){
+            Intent intent = new Intent(DangNhapActivity.this, QuenMatKhauActivity.class);
+            startActivity(intent);
+        }else if(textView.getId() == R.id.txtTaoTaiKhoan){
+            Intent intent = new Intent(DangNhapActivity.this, DangKyActivity.class);
+            startActivity(intent);
         }
     }
     /* Toast ở trang Đăng nhập*/
