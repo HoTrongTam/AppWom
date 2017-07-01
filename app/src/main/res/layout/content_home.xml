@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
     tools:context="com.example.wom.appwom.HomeActivity"
     tools:showIn="@layout/app_bar_home">
+    <ViewFlipper
+        android:id="@+id/viewlipper"
+        android:background="#5992d2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+    </ViewFlipper>
+    <TextView
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Sản phẩm mới nhất"
+        android:layout_margin="5dp"
 
-</android.support.constraint.ConstraintLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>
