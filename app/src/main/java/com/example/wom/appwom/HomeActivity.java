@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,8 +20,20 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.wom.appwom.Adapter.SanphamAdapter;
+import com.example.wom.appwom.DBHelper.APIConfig;
+import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Util.CheckConnection;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -37,6 +51,10 @@ public class HomeActivity extends AppCompatActivity
 
     @BindView(R.id.viewlipper)
     ViewFlipper viewFlipper;
+    @BindView(R.id.recyclerview)
+    RecyclerView recyclerView;
+    ArrayList<Sanpham> mangsp;
+    SanphamAdapter sanphamAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +67,51 @@ public class HomeActivity extends AppCompatActivity
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionBar();
             ActionViewFlipper();
-
+            Getdulieusanpham();
 
         } else {
-            CheckConnection.ShowToast_Short(getApplicationContext(),"Bạn hãy kiểm tra lại kết nối");
+            CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();
         }
 
 
+    }
+
+    private void Getdulieusanpham() {
+        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_LoadProduct, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response != null) {
+                    int ID = 0;
+                    String tensanpham = "";
+                    String hinhanhsanpham = "";
+                    String motasanpham = "";
+                    int IDsanpham = 0;
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            ID = jsonObject.getInt("id");
+                            tensanpham = jsonObject.getString("tensanpham");
+                            hinhanhsanpham = jsonObject.getString("hinhsanpham");
+                            motasanpham = jsonObject.getString("motasanpham");
+                            IDsanpham = jsonObject.getInt("id_loaisanpham");
+                            mangsp.add(new Sanpham(ID,tensanpham,hinhanhsanpham,motasanpham,IDsanpham));
+                            sanphamAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
     }
 
     private void ActionBar() {
@@ -92,7 +147,11 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void Anhxa() {
-
+        mangsp = new ArrayList<>();
+        sanphamAdapter = new SanphamAdapter(getApplicationContext(), mangsp);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerView.setAdapter(sanphamAdapter);
 
     }
 
