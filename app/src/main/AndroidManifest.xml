@@ -21,10 +21,12 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
+            android:label="Trang chính"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterStoreActivity" />
-        <activity android:name=".DangNhapActivity">
+        <activity
+            android:name=".DangNhapActivity"
+            android:label="Đăng nhập">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,8 +47,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DangNhapActivity" />
         </activity>
-        <activity android:name=".ThongTinTaiKhoanActivity" />
-        <activity android:name=".DoiMatKhauActivity"></activity>
+        <activity
+            android:name=".ThongTinTaiKhoanActivity"
+            android:label="Thông tin tài khoản"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".DoiMatKhauActivity"
+            android:label="Đổi mật khẩu">
+
+        </activity>
     </application>
 
 </manifest>
