@@ -25,6 +25,13 @@ public class Taikhoan {
         this.maxacnhan = maxacnhan;
     }
 
+    public Taikhoan(String email, int id_tk, String hoten, String maxacnhan) {
+        this.email = email;
+        this.id_tk = id_tk;
+        this.hoten = hoten;
+        this.maxacnhan = maxacnhan;
+    }
+
     public String getMaxacnhan() {
         return maxacnhan;
     }

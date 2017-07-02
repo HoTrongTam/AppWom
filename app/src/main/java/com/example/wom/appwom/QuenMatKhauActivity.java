@@ -2,7 +2,9 @@ package com.example.wom.appwom;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -81,6 +83,8 @@ public class QuenMatKhauActivity extends AppCompatActivity {
     private int year, month, day;
     ArrayList<Taikhoan> accList;
     String UPDATE_ID;
+    ProgressDialog mProgress;
+    int FLAG = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +97,12 @@ public class QuenMatKhauActivity extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        /* Progress */
+        mProgress =new ProgressDialog(this);
+        String titleId="Đang xử lý dữ liệu...";
+        mProgress.setTitle(titleId);
+        mProgress.setCancelable(false);
+        mProgress.setMessage("Vui lòng chờ trong giây lát...");
         if (CheckConnection.haveNetworkConnection(getApplicationContext()))
         {
             QuenMatKhau();
@@ -133,9 +143,21 @@ public class QuenMatKhauActivity extends AppCompatActivity {
                 edtMaXacNhan.requestFocus();
                 return;
             }
-
             // bắt sự kiện khi đã bắt lỗi thành công, sau đó thực hiện thêm dữ liệu vào bảng tài khoản
             XuLyDuLieuMail(email);
+
+            // Xử lý lại mảng accList để truy vấn Mã xác nhận
+            mProgress.show();
+            Runnable progressRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    QuenMatKhau();
+                    mProgress.cancel();
+                }
+            };
+
+            Handler pdCanceller = new Handler();
+            pdCanceller.postDelayed(progressRunnable, 3000);
 
         }else if (button.getId() == R.id.btnNhapLaiQMK)
         {
@@ -156,9 +178,6 @@ public class QuenMatKhauActivity extends AppCompatActivity {
                 edtMaXacNhanMail.requestFocus();
                 return;
             }
-
-            QuenMatKhau();
-
             if (makhau1.isEmpty())
             {
                 CheckConnection.ShowToast_Short(getApplicationContext(),"Vui lòng nhập mật khẩu mới");
@@ -177,6 +196,8 @@ public class QuenMatKhauActivity extends AppCompatActivity {
                 edtMatKhauMoiQMK_XacNhan.requestFocus();
                 return;
             }
+            // Cap nhat danh sách
+            QuenMatKhau();
 
             for (int i = 0; i < accList.size(); i++) {
                 Taikhoan taikhoan = accList.get(i);
@@ -192,7 +213,6 @@ public class QuenMatKhauActivity extends AppCompatActivity {
             }
             CheckConnection.ShowToast_Short(getApplicationContext(),"Mã xác nhận không chính xác");
             edtMaXacNhanMail.requestFocus();
-
 
         }else if (button.getId() == R.id.btnXacNhan_NhapLaiQMK)
         {
@@ -212,13 +232,15 @@ public class QuenMatKhauActivity extends AppCompatActivity {
                     int ID = 0;
                     String email = "";
                     String maxacnhan = "";
+                    String hoten = "";
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject jsonObject = response.getJSONObject(i);
                             ID = jsonObject.getInt("id_tk");
                             email = jsonObject.getString("email");
                             maxacnhan = jsonObject.getString("maxacnhan");
-                            accList.add(new Taikhoan(email,ID,maxacnhan));
+                            hoten = jsonObject.getString("hoten");
+                            accList.add(new Taikhoan(email,ID,hoten,maxacnhan));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -232,6 +254,7 @@ public class QuenMatKhauActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(jsonArrayRequest);
+        mProgress.dismiss();
     }
 
 
@@ -250,17 +273,16 @@ public class QuenMatKhauActivity extends AppCompatActivity {
                 List<String> toEmailList = Arrays.asList(toEmails
                         .split("\\s*,\\s*"));
                 String emailSubject = "Xác nhận thay đổi mật khẩu từ WOM";
-                String emailBody = "Chào "+accList.get(i).getHoten()+","
+                String emailBody = "Chào "+ tk.getHoten()+","
                         +"<br><br>Vui long nhap ma xac nhan: <b>"+ maxacnhan+"</b> de thay doi mat khau cua ban."
                         +"<br>Tran trong cam on!!"
                         +"<br>----------------------";
 
-                // Gửi về Mail
+                // Gửi mã xác nhận về Mail
                 new SendMailTask(QuenMatKhauActivity.this).execute(fromEmail,
                         fromPassword, toEmailList, emailSubject, emailBody);
                 // cập nhật mã xác nhận cho tài khoản
                 POST_KEY(maxacnhan, ""+tk.getId_tk());
-
                 return;
             }
         }
