@@ -358,11 +358,7 @@ public class DangKyActivity extends AppCompatActivity {
                 // kiểm tra dữ liệu từ RadioGroup
                int selectedId = rdGroupDK.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
-                if (radioButton.getText().equals("Nam")){
-                    hashMap.put("gioitinh", "1");
-                }else {
-                    hashMap.put("gioitinh", "2");
-                }
+                hashMap.put("gioitinh", ((radioButton.getText().equals("Nam")==true) ? "1" : "2"));
                 hashMap.put("ngaysinh", dateView.getText().toString());
                 return hashMap;
             }

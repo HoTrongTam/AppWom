@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -122,7 +124,6 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity {
 
                     // xác nhận thay đổi
                     XacNhanThayDoiThongTin();
-                    rdNam.setChecked(true);
                     CheckConnection.ShowToast_Short(getApplicationContext(),"Cập nhật thành công !!");
                     mProgress.cancel();
                 }
@@ -213,11 +214,7 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity {
                 // kiểm tra dữ liệu từ RadioGroup
                 int selectedId = rdGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
-                if (radioButton.getText().equals("Nam")){
-                    hashMap.put("gioitinh", "1");
-                }else{
-                    hashMap.put("gioitinh", "2");
-                }
+                hashMap.put("gioitinh", ((radioButton.getText().equals("Nam")==true) ? "1" : "2"));
                 hashMap.put("ngaysinh", txtNgaySinh.getText().toString());
                 return hashMap;
             }
