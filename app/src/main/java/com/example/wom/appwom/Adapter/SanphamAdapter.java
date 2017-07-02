@@ -54,7 +54,7 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-
+//aaaaaaaaaaaaaaaaaa
         Sanpham sanpham = arrSanpham.get(position);
         holder.txtTensp.setText(sanpham.getTensanpham());
         Picasso.with(context).load(sanpham.getHinhsanpham())
