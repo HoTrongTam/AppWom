@@ -58,7 +58,7 @@
         <activity
             android:name=".DoiMatKhauActivity"
             android:label="Đổi mật khẩu" />
-        <activity android:name=".Util.SanPhamActivity" />
+        <activity android:name=".SanPhamActivity" />
         <activity android:name=".Dienthoai" />
         <activity android:name=".Laptop"></activity>
     </application>
