@@ -186,10 +186,12 @@ public class DangNhapActivity extends AppCompatActivity {
                         String id = c.getString("id_tk");
                         String matkhau = c.getString("matkhau");
                         String email = c.getString("email");
+                        String vaitro = c.getString("vaitro");
                         HashMap<String, String> account = new HashMap<>();
                         account.put("id", id);
                         account.put("matkhau", matkhau);
                         account.put("email", email);
+                        account.put("vaitro", vaitro);
                         accList.add(account);
                     }
                 } catch (final JSONException e) {
@@ -228,9 +230,15 @@ public class DangNhapActivity extends AppCompatActivity {
                     Toast("Đăng nhập thành công");
                     // SET USER_ID
                     USER_LOGIN_ID = accList.get(i).get("id");
-                    // đăng nhập thành công chuyển vào Trang Home
-                    Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    if (accList.get(i).get("vaitro").equals("1")) {
+                        // đăng nhập thành công chuyển vào Trang Home
+                        Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }else{
+                        // đăng nhập thành công chuyển vào Trang Admin
+                        Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
                     luuThongTin();
                     finish();
                     return;
