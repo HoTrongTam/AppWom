@@ -2,6 +2,9 @@ package com.example.wom.appwom;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -89,6 +92,7 @@ public class DangKyActivity extends AppCompatActivity {
     private RadioButton radioButton;
     private int year, month, day;
     String REGISTER_ID = "";
+    ProgressDialog mProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +104,13 @@ public class DangKyActivity extends AppCompatActivity {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        /* Progress */
+        mProgress =new ProgressDialog(this);
+        String titleId="Đang xử lý dữ liệu...";
+        mProgress.setTitle(titleId);
+        mProgress.setCancelable(false);
+        mProgress.setMessage("Vui lòng chờ trong giây lát...");
 
         dateView.setText(new StringBuilder()
                 .append(year).append("-").append(month + 1).append("-")
@@ -117,7 +128,7 @@ public class DangKyActivity extends AppCompatActivity {
         {
             Pattern p = null;
             Matcher m = null;
-            String email = edtEmailDK.getText().toString();
+            final String email = edtEmailDK.getText().toString();
             String matkhau = edtMatKhau.getText().toString();
             String nhaplaimatkhau = edtMatKhauNhapLai.getText().toString();
             String maxacnhan = txtMaXacNhan.getText().toString();
@@ -176,13 +187,23 @@ public class DangKyActivity extends AppCompatActivity {
             }
 
             // bắt sự kiện khi đã bắt lỗi thành công, sau đó thực hiện thêm dữ liệu vào bảng tài khoản
+            mProgress.show();
+            Runnable progressRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    tabDangKy.setVisibility(View.INVISIBLE);
+                    tabThongTin.setVisibility(View.VISIBLE);
 
-            tabDangKy.setVisibility(View.INVISIBLE);
-            tabThongTin.setVisibility(View.VISIBLE);
+                    txtEmail.setText(email);
+                    DangKyTaiKhoan();
+                    rdNam.setChecked(true);
 
-            txtEmail.setText(email);
-            DangKyTaiKhoan();
-            rdNam.setChecked(true);
+                    mProgress.cancel();
+                }
+            };
+
+            Handler pdCanceller = new Handler();
+            pdCanceller.postDelayed(progressRunnable, 3000);
 
         }else if (button.getId() == R.id.btnNhapLaiDK){
             edtEmailDK.setText(null);
@@ -196,7 +217,23 @@ public class DangKyActivity extends AppCompatActivity {
                 edtHoTenDK.requestFocus();
                 return;
             }
-            XacNhanDangKy();
+
+            // Xử lý lại mảng accList để truy vấn Mã xác nhận
+            mProgress.show();
+            Runnable progressRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    XacNhanDangKy();
+                    Intent intent = new Intent(DangKyActivity.this, DangNhapActivity.class);
+                    startActivity(intent);
+                    mProgress.cancel();
+                }
+            };
+
+            Handler pdCanceller = new Handler();
+            pdCanceller.postDelayed(progressRunnable, 3000);
+
+
         }else if (button.getId() == R.id.btnDateDK){
             showDialog(999);
         }else if (button.getId() == R.id.btnXacNhan_NhapLaiDK){
@@ -287,7 +324,7 @@ public class DangKyActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String,String> hashMap = new HashMap<String, String>();
                 hashMap.put("id_tk", REGISTER_ID);
-                hashMap.put("hoten", edtMatKhauNhapLai.getText().toString());
+                hashMap.put("hoten", edtHoTenDK.getText().toString());
                 hashMap.put("anhdaidien", "1");
                 // kiểm tra dữ liệu từ RadioGroup
                int selectedId = rdGroupDK.getCheckedRadioButtonId();

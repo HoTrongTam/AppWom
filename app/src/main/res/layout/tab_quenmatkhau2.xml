@@ -57,8 +57,9 @@
                 android:id="@+id/edtMatKhauMoiQMK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mật Khẩu Mới"
+                android:hint="Mật khẩu mới"
                 android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
 
@@ -71,8 +72,9 @@
                 android:id="@+id/edtMatKhauMoiQMK_XacNhan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mật Khẩu Mới"
+                android:hint="Nhập lại mật khẩu mới"
                 android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
 
