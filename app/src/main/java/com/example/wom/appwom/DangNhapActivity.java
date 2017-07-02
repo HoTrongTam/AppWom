@@ -82,7 +82,6 @@ public class DangNhapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
         ButterKnife.bind(this);
-
         accList = new ArrayList<>();
                 /*- Progress -*/
         mProgress =new ProgressDialog(this);
@@ -90,9 +89,7 @@ public class DangNhapActivity extends AppCompatActivity {
         mProgress.setTitle(titleId);
         mProgress.setCancelable(false);
         mProgress.setMessage("Vui lòng chờ trong giây lát...");
-
     }
-
     @OnClick({R.id.btnDangNhap ,R.id.btnNhapLai})
     public void submit(Button button) {
         String user = edtUser.getText().toString();
@@ -107,23 +104,17 @@ public class DangNhapActivity extends AppCompatActivity {
              Toast("Không được bỏ trống mật khẩu đăng nhập");
                 return;
             }else {
-
                 mProgress.show();
                 Runnable progressRunnable = new Runnable() {
                     @Override
                     public void run() {
-
                         // xác nhận đăng nhập
                         new GetAccounts().execute();
-                        Toast("Đăng nhập thành công !!");
                         mProgress.cancel();
                     }
                 };
-
                 Handler pdCanceller = new Handler();
                 pdCanceller.postDelayed(progressRunnable, 3000);
-
-
             }
         } else if (button.getId() == R.id.btnNhapLai){
             edtUser.setText(null);
@@ -169,7 +160,6 @@ public class DangNhapActivity extends AppCompatActivity {
             String matkhau = pref.getString("mk", "");
             edtUser.setText(taikhoan);
             edtMatKhau.setText(matkhau);
-
         }
         chkLuuMatKhau.setChecked(chk);
     }
@@ -184,9 +174,7 @@ public class DangNhapActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-
             String jsonStr = sh.makeServiceCall(URL_Login);
-
            // Log.e(TAG, "Kiểm tra url: " + jsonStr);
             if (jsonStr != null) {
                 try {
@@ -198,13 +186,10 @@ public class DangNhapActivity extends AppCompatActivity {
                         String id = c.getString("id_tk");
                         String matkhau = c.getString("matkhau");
                         String email = c.getString("email");
-
                         HashMap<String, String> account = new HashMap<>();
-
                         account.put("id", id);
                         account.put("matkhau", matkhau);
                         account.put("email", email);
-
                         accList.add(account);
                     }
                 } catch (final JSONException e) {
@@ -217,9 +202,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                         }
                     });
-
                 }
-
             } else {
                 Log.e(TAG, "Không thể kết nối với server.");
                 runOnUiThread(new Runnable() {
@@ -231,7 +214,6 @@ public class DangNhapActivity extends AppCompatActivity {
                     }
                 });
             }
-
             return null;
         }
 
@@ -243,7 +225,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
             for (int i = 0; i < accList.size();i++){
                 if (accList.get(i).get("email").equals(user) && accList.get(i).get("matkhau").equals(matkhau)){
-                    //Toast("Đăng nhập thành công");
+                    Toast("Đăng nhập thành công");
                     // SET USER_ID
                     USER_LOGIN_ID = accList.get(i).get("id");
                     // đăng nhập thành công chuyển vào Trang Home

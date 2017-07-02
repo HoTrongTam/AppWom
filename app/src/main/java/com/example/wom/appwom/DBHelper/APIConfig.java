@@ -18,6 +18,7 @@ public class APIConfig {
     public static final String URL_LoadProduct = "http://"+locahost+":8081/WOM/getsanpham.php";
     public static final String URL_CapNhatMaXacNhan = "http://"+locahost+":8081/WOM/updateMaXacNhan.php";
     public static final String URL_CapNhatMatKhau = "http://"+locahost+":8081/WOM/updateMatKhau.php";
+    public static final String URL_DoiMatKhau = "http://"+locahost+":8081/WOM/updateDoiMatKhau.php";
     public static final String URL_CapNhatTrangThai = "http://"+locahost+":8081/WOM/updateTrangThai.php";
     public static final String URL_CapNhatThongTinTaiKhoan = "http://"+locahost+":8081/WOM/updateThongTinTaiKhoan.php";
     public static final String USERNAME = "USERNAME";

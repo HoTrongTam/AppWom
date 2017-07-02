@@ -58,8 +58,11 @@
 
         <activity
             android:name=".DoiMatKhauActivity"
-            android:label="Đổi mật khẩu">
-
+            android:label="Đổi mật khẩu"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
         </activity>
     </application>
 
