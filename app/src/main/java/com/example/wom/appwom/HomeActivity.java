@@ -229,7 +229,7 @@ public class HomeActivity extends AppCompatActivity
             // Handle the camera action
             Intent intent = new Intent(HomeActivity.this, ThongTinTaiKhoanActivity.class);
             startActivity(intent);
-        } else if (id == R.id.lv_product) {
+        } else if (id == R.id.navproduct) {
             Intent intent = new Intent(HomeActivity.this, SanPhamActivity.class);
             startActivity(intent);
 
