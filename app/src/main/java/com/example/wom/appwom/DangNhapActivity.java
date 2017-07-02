@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.wom.appwom.DBHelper.ConnectionClass;
 import com.example.wom.appwom.DBHelper.HttpHandler;
 import com.example.wom.appwom.Model.Taikhoan;
+import com.example.wom.appwom.Util.CheckConnection;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -105,7 +107,23 @@ public class DangNhapActivity extends AppCompatActivity {
              Toast("Không được bỏ trống mật khẩu đăng nhập");
                 return;
             }else {
-                new GetAccounts().execute();
+
+                mProgress.show();
+                Runnable progressRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+
+                        // xác nhận đăng nhập
+                        new GetAccounts().execute();
+                        Toast("Đăng nhập thành công !!");
+                        mProgress.cancel();
+                    }
+                };
+
+                Handler pdCanceller = new Handler();
+                pdCanceller.postDelayed(progressRunnable, 3000);
+
+
             }
         } else if (button.getId() == R.id.btnNhapLai){
             edtUser.setText(null);
@@ -225,7 +243,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
             for (int i = 0; i < accList.size();i++){
                 if (accList.get(i).get("email").equals(user) && accList.get(i).get("matkhau").equals(matkhau)){
-                    Toast("Đăng nhập thành công");
+                    //Toast("Đăng nhập thành công");
                     // SET USER_ID
                     USER_LOGIN_ID = accList.get(i).get("id");
                     // đăng nhập thành công chuyển vào Trang Home
@@ -233,7 +251,6 @@ public class DangNhapActivity extends AppCompatActivity {
                     startActivity(intent);
                     luuThongTin();
                     finish();
-                    mProgress.dismiss();
                     return;
                 }
             }

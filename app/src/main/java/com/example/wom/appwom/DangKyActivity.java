@@ -193,17 +193,17 @@ public class DangKyActivity extends AppCompatActivity {
                 public void run() {
                     tabDangKy.setVisibility(View.INVISIBLE);
                     tabThongTin.setVisibility(View.VISIBLE);
-
                     txtEmail.setText(email);
+                    // xác nhận đăng ký
                     DangKyTaiKhoan();
-                    rdNam.setChecked(true);
 
+                    rdNam.setChecked(true);
                     mProgress.cancel();
                 }
             };
 
             Handler pdCanceller = new Handler();
-            pdCanceller.postDelayed(progressRunnable, 3000);
+            pdCanceller.postDelayed(progressRunnable, 2000);
 
         }else if (button.getId() == R.id.btnNhapLaiDK){
             edtEmailDK.setText(null);
@@ -286,6 +286,8 @@ public class DangKyActivity extends AppCompatActivity {
             public void onResponse(String response) {
               //  Toast(""+ response); // trả về ID tài khoản
                 REGISTER_ID = ""+response;
+                // POST Thông tin mặc định cho tài khoản
+                POST_THONGTIN();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -306,10 +308,37 @@ public class DangKyActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    // xác nhận thông tin tài khoản, điền thông tin đầy đủ cho tài khoản
-    private void XacNhanDangKy(){
+    // THông tin mặc định cho tài khoản vừa tạo thành công
+    private void POST_THONGTIN(){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, APIConfig.URL_Register_Confirm, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast(""+ response); // trả về id thông tin tài khoản
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> hashMap = new HashMap<String, String>();
+                hashMap.put("id_tk", REGISTER_ID);
+                hashMap.put("hoten", "WOM");
+                hashMap.put("anhdaidien", "1");
+                hashMap.put("gioitinh", "1");
+                hashMap.put("ngaysinh", dateView.getText().toString());
+                return hashMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    // thay đổi xác nhận thông tin tài khoản, điền thông tin đầy đủ cho tài khoản
+    private void XacNhanDangKy(){
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, APIConfig.URL_CapNhatThongTinTaiKhoan, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                  //Toast(""+ response); // trả về id thông tin tài khoản
@@ -332,7 +361,7 @@ public class DangKyActivity extends AppCompatActivity {
                 if (radioButton.getText().equals("Nam")){
                     hashMap.put("gioitinh", "1");
                 }else {
-                    hashMap.put("gioitinh", "0");
+                    hashMap.put("gioitinh", "2");
                 }
                 hashMap.put("ngaysinh", dateView.getText().toString());
                 return hashMap;

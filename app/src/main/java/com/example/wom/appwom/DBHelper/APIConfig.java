@@ -12,11 +12,14 @@ public class APIConfig {
     public static final String URL_Login = "http://"+locahost+":8081/WOM/getTaiKhoan.php";
     public static final String URL_getTaikhoan = "http://"+locahost+":8081/WOM/getTaiKhoan2.php";
     public static final String URL_getThongTinTaiKhoan = "http://"+locahost+":8081/WOM/getThongTinTaiKhoan.php";
+    public static final String URL_getThongTinTaiKhoan2 = "http://"+locahost+":8081/WOM/getThongTinTaiKhoan2.php";
     public static final String URL_Register = "http://"+locahost+":8081/WOM/postTaiKhoan.php";
     public static final String URL_Register_Confirm = "http://"+locahost+":8081/WOM/insertThongtintaikhoan.php";
     public static final String URL_LoadProduct = "http://"+locahost+":8081/WOM/getsanpham.php";
     public static final String URL_CapNhatMaXacNhan = "http://"+locahost+":8081/WOM/updateMaXacNhan.php";
     public static final String URL_CapNhatMatKhau = "http://"+locahost+":8081/WOM/updateMatKhau.php";
+    public static final String URL_CapNhatTrangThai = "http://"+locahost+":8081/WOM/updateTrangThai.php";
+    public static final String URL_CapNhatThongTinTaiKhoan = "http://"+locahost+":8081/WOM/updateThongTinTaiKhoan.php";
     public static final String USERNAME = "USERNAME";
     public static final String PASSWORD = "PASSWORD";
     public static String USER_LOGIN_ID = "USER_ID";

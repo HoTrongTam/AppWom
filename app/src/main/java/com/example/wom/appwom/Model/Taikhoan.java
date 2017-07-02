@@ -13,7 +13,8 @@ public class Taikhoan {
     public String vaitro;
     public String trangthai_tk;
     public String maxacnhan;
-
+    public String anhdaidien;
+    public String gioitinh;
     public Taikhoan(String email, String matkhau) {
         this.email = email;
         this.matkhau = matkhau;
@@ -30,6 +31,31 @@ public class Taikhoan {
         this.id_tk = id_tk;
         this.hoten = hoten;
         this.maxacnhan = maxacnhan;
+    }
+
+    public Taikhoan(String email, int id_tk, String hoten, String ngaysinh, String anhdaidien, String gioitinh) {
+        this.email = email;
+        this.id_tk = id_tk;
+        this.hoten = hoten;
+        this.ngaysinh = ngaysinh;
+        this.anhdaidien = anhdaidien;
+        this.gioitinh = gioitinh;
+    }
+
+    public String getGioitinh() {
+        return gioitinh;
+    }
+
+    public void setGioitinh(String gioitinh) {
+        this.gioitinh = gioitinh;
+    }
+
+    public String getAnhdaidien() {
+        return anhdaidien;
+    }
+
+    public void setAnhdaidien(String anhdaidien) {
+        this.anhdaidien = anhdaidien;
     }
 
     public String getMaxacnhan() {
