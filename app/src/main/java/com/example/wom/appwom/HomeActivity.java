@@ -31,7 +31,6 @@ import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Model.Taikhoan;
 import com.example.wom.appwom.Util.CheckConnection;
-import com.example.wom.appwom.Util.SanPhamActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
