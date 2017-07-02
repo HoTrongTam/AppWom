@@ -42,6 +42,9 @@ public class Taikhoan {
         this.gioitinh = gioitinh;
     }
 
+    public Taikhoan() {
+    }
+
     public String getGioitinh() {
         return gioitinh;
     }

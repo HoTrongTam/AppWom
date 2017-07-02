@@ -272,10 +272,11 @@ public class QuenMatKhauActivity extends AppCompatActivity {
                 String toEmails = email;
                 List<String> toEmailList = Arrays.asList(toEmails
                         .split("\\s*,\\s*"));
-                String emailSubject = "Xác nhận thay đổi mật khẩu từ WOM";
-                String emailBody = "Chào "+ tk.getHoten()+","
-                        +"<br><br>Vui long nhap ma xac nhan: <b>"+ maxacnhan+"</b> de thay doi mat khau cua ban."
-                        +"<br>Tran trong cam on!!"
+                String emailSubject = maxacnhan + " là mã khôi phục tài khoản WOM của bạn";
+                String emailBody = "Xin chào "+ tk.getHoten()+","
+                        +"<br><br>Chung toi da nhan duoc yeu cau dat lai mat khau WOM cua ban."
+                        +"<br><br>Vui long ban nhap ma xac nhan: <b>"+ maxacnhan+"</b> de thay doi mat khau cua ban."
+                        +"<br><br>Tran trong cam on!!"
                         +"<br>----------------------";
 
                 // Gửi mã xác nhận về Mail
