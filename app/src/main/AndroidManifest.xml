@@ -55,12 +55,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
-
         <activity
             android:name=".DoiMatKhauActivity"
-            android:label="Đổi mật khẩu">
-
-        </activity>
+            android:label="Đổi mật khẩu" />
+        <activity android:name=".Util.SanPhamActivity" />
+        <activity android:name=".Dienthoai" />
+        <activity android:name=".Laptop"></activity>
     </application>
 
 </manifest>

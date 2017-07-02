@@ -31,6 +31,7 @@ import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Model.Taikhoan;
 import com.example.wom.appwom.Util.CheckConnection;
+import com.example.wom.appwom.Util.SanPhamActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -228,7 +229,9 @@ public class HomeActivity extends AppCompatActivity
             // Handle the camera action
             Intent intent = new Intent(HomeActivity.this, ThongTinTaiKhoanActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.lv_product) {
+            Intent intent = new Intent(HomeActivity.this, SanPhamActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
 
