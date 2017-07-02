@@ -31,19 +31,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DangKyActivity"
+        <activity
+            android:name=".DangKyActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DangNhapActivity" />
         </activity>
-
-        <activity android:name=".QuenMatKhauActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".QuenMatKhauActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DangNhapActivity" />
         </activity>
+        <activity android:name=".ThongTinTaiKhoanActivity" />
+        <activity android:name=".DoiMatKhauActivity"></activity>
     </application>
 
 </manifest>

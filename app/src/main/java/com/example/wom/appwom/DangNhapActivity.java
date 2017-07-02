@@ -51,6 +51,8 @@ import butterknife.OnClick;
 
 import static com.example.wom.appwom.DBHelper.APIConfig.URL_Login;
 import static com.example.wom.appwom.DBHelper.APIConfig.USERNAME;
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_HOTEN;
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
 
 public class DangNhapActivity extends AppCompatActivity {
 
@@ -224,6 +226,8 @@ public class DangNhapActivity extends AppCompatActivity {
             for (int i = 0; i < accList.size();i++){
                 if (accList.get(i).get("email").equals(user) && accList.get(i).get("matkhau").equals(matkhau)){
                     Toast("Đăng nhập thành công");
+                    // SET USER_ID
+                    USER_LOGIN_ID = accList.get(i).get("id");
                     // đăng nhập thành công chuyển vào Trang Home
                     Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
                     startActivity(intent);

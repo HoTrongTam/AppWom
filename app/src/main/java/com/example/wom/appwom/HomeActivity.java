@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.android.volley.RequestQueue;
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.Adapter.SanphamAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Sanpham;
+import com.example.wom.appwom.Model.Taikhoan;
 import com.example.wom.appwom.Util.CheckConnection;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +46,7 @@ import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_01;
 import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_02;
 import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_03;
 import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_04;
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,6 +58,14 @@ public class HomeActivity extends AppCompatActivity
     RecyclerView recyclerView;
     ArrayList<Sanpham> mangsp;
     SanphamAdapter sanphamAdapter;
+
+    // Cấu hình NavigationView
+    TextView txtHoTenNV;
+    TextView txtEmailNV;
+    String hoten = "";
+    String email = "";
+    // Thông tin trên HomeActivity
+    ArrayList<Taikhoan> accList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +79,7 @@ public class HomeActivity extends AppCompatActivity
             ActionBar();
             ActionViewFlipper();
             Getdulieusanpham();
-
+            getThongTinTaiKhoan();
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();
@@ -134,6 +145,12 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerLayout = navigationView.getHeaderView(0);
+        txtHoTenNV = (TextView) headerLayout.findViewById(R.id.txtHoTenHome);
+        txtEmailNV = (TextView) headerLayout.findViewById(R.id.txtEmailHome);
+
+
     }
 
     @Override
@@ -152,7 +169,7 @@ public class HomeActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView.setAdapter(sanphamAdapter);
-
+        accList = new ArrayList<>();
     }
 
     private void ActionViewFlipper() {
@@ -225,5 +242,53 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void getThongTinTaiKhoan(){
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_getThongTinTaiKhoan, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response != null) {
+                    accList.clear();
+                    int ID = 0;
+                    String email = "";
+                    String maxacnhan = "";
+                    String hoten = "";
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            ID = jsonObject.getInt("id_tk");
+                            email = jsonObject.getString("email");
+                            hoten = jsonObject.getString("hoten");
+                            maxacnhan = jsonObject.getString("maxacnhan");
+                            accList.add(new Taikhoan(email,ID,hoten,maxacnhan));
+                            if (USER_LOGIN_ID.equals(ID+"")){
+                                txtHoTenNV.setText(hoten);
+                                txtEmailNV.setText(email);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
