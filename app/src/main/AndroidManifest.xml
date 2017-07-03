@@ -56,14 +56,32 @@
         </activity>
         <activity
             android:name=".DoiMatKhauActivity"
-            android:label="Đổi mật khẩu" />
-        <activity android:name=".SanPhamActivity" />
+            android:label="Đổi mật khẩu"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".SanPhamActivity"
+            android:label="Danh sách sản phẩm"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
         <activity android:name=".Dienthoai"
-            android:label="Điện thoại"/>
+            android:label="Điện thoại"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SanPhamActivity" />
+        </activity>
         <activity android:name=".Laptop" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="Trang quản lý WOM"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
