@@ -1,10 +1,12 @@
 package com.example.wom.appwom.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by hotrongtam on 7/1/2017.
  */
 
-public class Sanpham {
+public class Sanpham implements Serializable{
     public int id;
     public String Tensanpham;
     public String Hinhsanpham;

@@ -19,7 +19,7 @@
             <ImageView
                 android:id="@+id/imgLaptop"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:layout_margin="2dp"
                 android:adjustViewBounds="true" />
 

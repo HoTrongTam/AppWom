@@ -62,7 +62,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
-
         <activity
             android:name=".SanPhamActivity"
             android:label="Danh sách sản phẩm"
@@ -71,7 +70,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
-        <activity android:name=".Dienthoai"
+        <activity
+            android:name=".Dienthoai"
             android:label="Điện thoại"
             android:screenOrientation="portrait">
             <meta-data
@@ -82,7 +82,9 @@
         <activity
             android:name=".MainActivity"
             android:label="Trang quản lý WOM"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChitietSanpham" />
+        <activity android:name=".ChitietSanphamLaptop"></activity>
     </application>
 
 </manifest>
