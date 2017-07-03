@@ -31,7 +31,7 @@ public class SanPhamActivity extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case 1:
-                        Toast.makeText(SanPhamActivity.this, "2", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
