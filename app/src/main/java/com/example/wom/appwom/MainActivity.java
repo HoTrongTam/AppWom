@@ -13,16 +13,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.wom.appwom.DBHelper.APIConfig;
+import com.example.wom.appwom.Model.Taikhoan;
+import com.example.wom.appwom.Util.CheckConnection;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import butterknife.ButterKnife;
+
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // Cấu hình NavigationView
+    TextView txtHoTenNV;
+    TextView txtEmailNV;
+    ArrayList<Taikhoan> accList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ButterKnife.bind(this);
+        accList = new ArrayList<>();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +69,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerLayout = navigationView.getHeaderView(0);
+        txtHoTenNV = (TextView) headerLayout.findViewById(R.id.txtNameMain);
+        txtEmailNV = (TextView) headerLayout.findViewById(R.id.txtMailMain);
+
+        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            getThongTinTaiKhoan();
+        } else {
+            CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+            finish();
+        }
     }
 
     @Override
@@ -82,13 +121,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, ThongTinTaiKhoanActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-
+            Intent intent = new Intent(MainActivity.this, SanPhamActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-
+            Intent intent = new Intent(MainActivity.this, DoiMatKhauActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -99,5 +141,43 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void getThongTinTaiKhoan(){
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_getThongTinTaiKhoan, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response != null) {
+                    accList.clear();
+                    int ID = 0;
+                    String email = "";
+                    String maxacnhan = "";
+                    String hoten = "";
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            ID = jsonObject.getInt("id_tk");
+                            email = jsonObject.getString("email");
+                            hoten = jsonObject.getString("hoten");
+                            maxacnhan = jsonObject.getString("maxacnhan");
+                            accList.add(new Taikhoan(email,ID,hoten,maxacnhan));
+                            if (USER_LOGIN_ID.equals(ID+"")){
+                               txtHoTenNV.setText(hoten);
+                                txtEmailNV.setText(email);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
     }
 }
