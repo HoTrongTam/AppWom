@@ -150,14 +150,13 @@ public class DoiMatKhauActivity extends AppCompatActivity {
                     XacNhanThayDoiThongTin();
                     CheckConnection.ShowToast_Short(getApplicationContext(), "Đổi mật khẩu thành công !!");
                     mProgress.cancel();
-                    Intent intent = new Intent(DoiMatKhauActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(DoiMatKhauActivity.this, DangNhapActivity.class);
                     startActivity(intent);
                 }
             };
 
             Handler pdCanceller = new Handler();
             pdCanceller.postDelayed(progressRunnable, 2000);
-
         }
     }
     @Override
@@ -214,6 +213,7 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 //Toast(""+ response); // trả về id thông tin tài khoản
+
             }
         }, new Response.ErrorListener() {
             @Override
