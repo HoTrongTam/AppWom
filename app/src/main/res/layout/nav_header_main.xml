@@ -12,17 +12,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imgAvatarMain"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:src="@mipmap/ic_launcher"
+        app:civ_border_color="#FF000000"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:id="@+id/txtNameMain"
         android:text="Android Studio"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />

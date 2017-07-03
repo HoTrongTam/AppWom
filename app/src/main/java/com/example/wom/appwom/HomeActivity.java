@@ -62,6 +62,7 @@ public class HomeActivity extends AppCompatActivity
     // Cấu hình NavigationView
     TextView txtHoTenNV;
     TextView txtEmailNV;
+    ImageView imgAvatar;
     String hoten = "";
     String email = "";
     // Thông tin trên HomeActivity
@@ -84,8 +85,6 @@ public class HomeActivity extends AppCompatActivity
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();
         }
-
-
     }
 
     private void Getdulieusanpham() {
@@ -149,7 +148,7 @@ public class HomeActivity extends AppCompatActivity
         View headerLayout = navigationView.getHeaderView(0);
         txtHoTenNV = (TextView) headerLayout.findViewById(R.id.txtHoTenHome);
         txtEmailNV = (TextView) headerLayout.findViewById(R.id.txtEmailHome);
-
+        imgAvatar = (ImageView) headerLayout.findViewById(R.id.imgAvatarHome);
 
     }
 
@@ -250,14 +249,14 @@ public class HomeActivity extends AppCompatActivity
     }
     private void getThongTinTaiKhoan(){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_getThongTinTaiKhoan, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_getThongTinTaiKhoan2, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if (response != null) {
                     accList.clear();
                     int ID = 0;
                     String email = "";
-                    String maxacnhan = "";
+                    String anhdaidien = "";
                     String hoten = "";
                     for (int i = 0; i < response.length(); i++) {
                         try {
@@ -266,11 +265,17 @@ public class HomeActivity extends AppCompatActivity
                             ID = jsonObject.getInt("id_tk");
                             email = jsonObject.getString("email");
                             hoten = jsonObject.getString("hoten");
-                            maxacnhan = jsonObject.getString("maxacnhan");
-                            accList.add(new Taikhoan(email,ID,hoten,maxacnhan));
+                            anhdaidien = jsonObject.getString("anhdaidien");
+                            accList.add(new Taikhoan(email,ID,hoten,"",anhdaidien, ""));
                             if (USER_LOGIN_ID.equals(ID+"")){
                                 txtHoTenNV.setText(hoten);
                                 txtEmailNV.setText(email);
+                                if (!anhdaidien.equals("R.mipmap.ic_launcher")){
+                                    Picasso.with(getApplicationContext()).load(anhdaidien).into(imgAvatar);
+                                }else{
+                                    Picasso.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(imgAvatar);
+                                }
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

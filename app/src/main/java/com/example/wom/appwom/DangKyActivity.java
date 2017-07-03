@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Util.CheckConnection;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +86,14 @@ public class DangKyActivity extends AppCompatActivity {
     Button btnXacNhanDK;
     @BindView(R.id.btnXacNhan_NhapLaiDK)
     Button btnXacNhan_NhapLaiDK;
-
+    @BindView(R.id.btnLoadAnhDK)
+    Button btnLoadAnh;
+    @BindView(R.id.edtURLDK)
+    EditText edtURL;
+    @BindView(R.id.imgAnhDaiDienDK)
+    ImageView imgAvatar;
+    @BindView(R.id.btnClearLoadAnhDK)
+    Button btnClearURL;
     // Thông tin trong Activity
     ArrayList<String> listMail;
     private DatePicker datePicker;
@@ -122,7 +131,7 @@ public class DangKyActivity extends AppCompatActivity {
             Toast("Vui lòng kiểm tra lại kết nối");
         }
     }
-    @OnClick({R.id.btnDangKy, R.id.btnNhapLaiDK, R.id.btnDateDK, R.id.btnXacNhanDK, R.id.btnXacNhan_NhapLaiDK})
+    @OnClick({R.id.btnDangKy, R.id.btnNhapLaiDK, R.id.btnDateDK, R.id.btnXacNhanDK, R.id.btnXacNhan_NhapLaiDK, R.id.btnLoadAnhDK, R.id.btnClearLoadAnhDK})
     public void btnDangKy(Button button) {
         if (button.getId() == R.id.btnDangKy)
         {
@@ -239,6 +248,15 @@ public class DangKyActivity extends AppCompatActivity {
         }else if (button.getId() == R.id.btnXacNhan_NhapLaiDK){
             edtHoTenDK.setText(null);
             rdNam.setChecked(true);
+        }else if (button.getId() == R.id.btnLoadAnhDK){
+            String txtURL = edtURL.getText().toString();
+            if (txtURL.isEmpty()){
+                Picasso.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(imgAvatar);
+            }else{
+                Picasso.with(getApplicationContext()).load(txtURL).into(imgAvatar);
+            }
+        }else if (button.getId() == R.id.btnClearLoadAnhDK){
+            edtURL.setText(null);
         }
     }
     /* Toast ở trang Đăng Ký*/
@@ -327,7 +345,7 @@ public class DangKyActivity extends AppCompatActivity {
                 HashMap<String,String> hashMap = new HashMap<String, String>();
                 hashMap.put("id_tk", REGISTER_ID);
                 hashMap.put("hoten", "WOM");
-                hashMap.put("anhdaidien", "1");
+                hashMap.put("anhdaidien", "R.mipmap.ic_launcher");
                 hashMap.put("gioitinh", "1");
                 hashMap.put("ngaysinh", dateView.getText().toString());
                 return hashMap;
@@ -354,7 +372,7 @@ public class DangKyActivity extends AppCompatActivity {
                 HashMap<String,String> hashMap = new HashMap<String, String>();
                 hashMap.put("id_tk", REGISTER_ID);
                 hashMap.put("hoten", edtHoTenDK.getText().toString());
-                hashMap.put("anhdaidien", "1");
+                hashMap.put("anhdaidien", edtURL.getText().toString());
                 // kiểm tra dữ liệu từ RadioGroup
                int selectedId = rdGroupDK.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);

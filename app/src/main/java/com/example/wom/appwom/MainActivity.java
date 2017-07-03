@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Taikhoan;
 import com.example.wom.appwom.Util.CheckConnection;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     // Cấu hình NavigationView
     TextView txtHoTenNV;
     TextView txtEmailNV;
+    ImageView imgAvatar;
     ArrayList<Taikhoan> accList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity
         View headerLayout = navigationView.getHeaderView(0);
         txtHoTenNV = (TextView) headerLayout.findViewById(R.id.txtNameMain);
         txtEmailNV = (TextView) headerLayout.findViewById(R.id.txtMailMain);
+        imgAvatar = (ImageView) headerLayout.findViewById(R.id.imgAvatarMain);
 
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             getThongTinTaiKhoan();
@@ -144,14 +148,14 @@ public class MainActivity extends AppCompatActivity
     }
     private void getThongTinTaiKhoan(){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_getThongTinTaiKhoan, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_getThongTinTaiKhoan2, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if (response != null) {
                     accList.clear();
                     int ID = 0;
                     String email = "";
-                    String maxacnhan = "";
+                    String anhdaidien = "";
                     String hoten = "";
                     for (int i = 0; i < response.length(); i++) {
                         try {
@@ -160,13 +164,18 @@ public class MainActivity extends AppCompatActivity
                             ID = jsonObject.getInt("id_tk");
                             email = jsonObject.getString("email");
                             hoten = jsonObject.getString("hoten");
-                            maxacnhan = jsonObject.getString("maxacnhan");
-                            accList.add(new Taikhoan(email,ID,hoten,maxacnhan));
+                            anhdaidien = jsonObject.getString("anhdaidien");
+                            accList.add(new Taikhoan(email,ID,hoten,"",anhdaidien, ""));
                             if (USER_LOGIN_ID.equals(ID+"")){
-                               txtHoTenNV.setText(hoten);
+                                txtHoTenNV.setText(hoten);
                                 txtEmailNV.setText(email);
-                            }
+                                if (!anhdaidien.equals("R.mipmap.ic_launcher")){
+                                    Picasso.with(getApplicationContext()).load(anhdaidien).into(imgAvatar);
+                                }else{
+                                    Picasso.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(imgAvatar);
+                                }
 
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

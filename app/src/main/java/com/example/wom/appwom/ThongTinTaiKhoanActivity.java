@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Taikhoan;
 import com.example.wom.appwom.Util.CheckConnection;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,6 +65,14 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity {
     Button btnXacNhan;
     @BindView(R.id.btnXacNhan_NhapLaiTT)
     Button btnNhapLai;
+    @BindView(R.id.imgAnhDaiDienTT)
+    ImageView imgAnhDaiDienTT;
+    @BindView(R.id.edtURLTT)
+    EditText edtURLTT;
+    @BindView(R.id.btnLoadAnhTT)
+    Button btnLoadAnhTT;
+    @BindView(R.id.btnClearLoadAnhTT)
+    Button btnClearLoadAnhTT;
     // Thông tin trên ThongtintaikhoanActivity
     ArrayList<Taikhoan> accList;
     private RadioButton radioButton;
@@ -99,7 +109,7 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity {
             finish();
         }
     }
-    @OnClick({R.id.btnDateTT, R.id.btnXacNhanTT, R.id.btnXacNhan_NhapLaiTT})
+    @OnClick({R.id.btnDateTT, R.id.btnXacNhanTT, R.id.btnXacNhan_NhapLaiTT, R.id.btnClearLoadAnhTT, R.id.btnLoadAnhTT})
     public void OnClick(Button button)
     {
         if (button.getId()==R.id.btnDateTT)
@@ -139,6 +149,15 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity {
             txtNgaySinh.setText(new StringBuilder()
                     .append(year).append("-").append(month + 1).append("-")
                     .append(day).append(" "));
+        }else if (button.getId() == R.id.btnLoadAnhTT){
+            String txtURL = edtURLTT.getText().toString();
+            if (txtURL.isEmpty()){
+                Picasso.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(imgAnhDaiDienTT);
+            }else{
+                Picasso.with(getApplicationContext()).load(txtURL).into(imgAnhDaiDienTT);
+            }
+        }else if (button.getId() == R.id.btnClearLoadAnhTT){
+            edtURLTT.setText(null);
         }
     }
     private void getThongTinTaiKhoan(){
@@ -175,6 +194,12 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity {
                                 }else{
                                     rdNu.setChecked(true);
                                 }
+                                if (!anhdaidien.equals("R.mipmap.ic_launcher")){
+                                    edtURLTT.setText(anhdaidien);
+                                    Picasso.with(getApplicationContext()).load(anhdaidien).into(imgAnhDaiDienTT);
+                                }else{
+                                    Picasso.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(imgAnhDaiDienTT);
+                                }
                             }
 
                         } catch (JSONException e) {
@@ -210,7 +235,7 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity {
                 HashMap<String,String> hashMap = new HashMap<String, String>();
                 hashMap.put("id_tk", USER_LOGIN_ID);
                 hashMap.put("hoten", edtHoten.getText().toString());
-                hashMap.put("anhdaidien", "1");
+                hashMap.put("anhdaidien", edtURLTT.getText().toString());
                 // kiểm tra dữ liệu từ RadioGroup
                 int selectedId = rdGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
