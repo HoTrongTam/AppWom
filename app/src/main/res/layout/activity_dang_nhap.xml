@@ -27,7 +27,8 @@
             android:id="@+id/edtUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập tài khoản"
+            android:hint="Nhập Email"
+            android:inputType="textEmailAddress"
             android:imeOptions="actionUnspecified"
             android:maxLines="1"
             android:singleLine="true" />
