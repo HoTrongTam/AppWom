@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tên sản phẩm"
                     android:layout_margin="5dp"
-                    android:textColor="#ffffff"
+                    android:textColor="#b71414"
                     android:textSize="18sp" />
                 <TextView
                     android:id="@+id/txtMotaDienthoai"
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:text="Mô tả"
                     android:layout_margin="5dp"
-                    android:textColor="#ffffff"
+                    android:textColor="#b61010"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
