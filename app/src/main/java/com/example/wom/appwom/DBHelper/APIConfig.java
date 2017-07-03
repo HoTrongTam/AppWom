@@ -22,6 +22,7 @@ public class APIConfig {
     public static final String URL_CapNhatTrangThai = "http://"+locahost+":8081/WOM/updateTrangThai.php";
     public static final String URL_CapNhatThongTinTaiKhoan = "http://"+locahost+":8081/WOM/updateThongTinTaiKhoan.php";
     public static final String DuongdanDT = "http://"+locahost+":8081/WOM/getlvsanpham.php?page=";
+    public static final String URL_LOAISP = "http://"+locahost+":8081/WOM/getLoaisanpham.php";
     public static final String USERNAME = "USERNAME";
     public static final String PASSWORD = "PASSWORD";
     public static String USER_LOGIN_ID = "USER_ID";

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -45,6 +46,7 @@ public class Dienthoai extends AppCompatActivity {
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
 
             Getdata(page);
+            Getidloaisp();
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại internet");
         }
@@ -52,6 +54,9 @@ public class Dienthoai extends AppCompatActivity {
 
     }
 
+    private void Getidloaisp(){
+        iddt = getIntent().getIntExtra("id_loaisanpham",-1);
+    }
     private void Getdata(int Page) {
 
         com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
