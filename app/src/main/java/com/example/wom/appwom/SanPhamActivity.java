@@ -18,20 +18,21 @@ public class SanPhamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_san_pham);
         final String arr[] = {"Điện thoại","Laptop"};
         ListView lv = (ListView)findViewById(R.id.lvSanpham);
+        lv.setItemsCanFocus(false);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,arr);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (position == 0){
-              // Intent intent = new Intent(SanPhamActivity.this, Dienthoai.class);
-                //startActivity(intent);
-                CheckConnection.ShowToast_Short(getApplicationContext(),"AAA");
-            }else if(position == 1){
-                //Intent intent = new Intent(SanPhamActivity.this,Laptop.class);
-                //startActivity(intent);
-                CheckConnection.ShowToast_Short(getApplicationContext(),"BBB");
-            }
+                switch (position) {
+                    case 0:
+                        Intent newActivity = new Intent(SanPhamActivity.this, Dienthoai.class);
+                        startActivity(newActivity);
+                        break;
+                    case 1:
+                        Intent newActivity1 = new Intent(SanPhamActivity.this, MainActivity.class);
+                        startActivity(newActivity1);
+                }
             }
         });
     }

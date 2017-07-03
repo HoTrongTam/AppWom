@@ -41,17 +41,18 @@ public class Dienthoai extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dienthoai);
         Anhxa();
-        if(CheckConnection.haveNetworkConnection(getApplicationContext())){
+        Actiontollbar();
+        /*if(CheckConnection.haveNetworkConnection(getApplicationContext())){
             Actiontollbar();
             Getdata(page);
         }else{
             CheckConnection.ShowToast_Short(getApplicationContext(),"Bạn hãy kiểm tra lại internet");
         }
-
+*/
 
     }
 
-    private void Getdata(int Page) {
+  /*  private void Getdata(int Page) {
 
         com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         String duongdan = APIConfig.DuongdanDT + String.valueOf(page);
@@ -99,7 +100,7 @@ public class Dienthoai extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
-
+*/
     private void Actiontollbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
