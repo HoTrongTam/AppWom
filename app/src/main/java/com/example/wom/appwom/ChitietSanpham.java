@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 public class ChitietSanpham extends AppCompatActivity {
 
-    Toolbar toolbarChitiet, toolbar;
+    Toolbar toolbar;
     ImageView imgChitiet;
     TextView txtTen, txtGia, txtMota;
     Spinner spinner;
@@ -102,20 +102,7 @@ public class ChitietSanpham extends AppCompatActivity {
                 .placeholder(R.drawable.load).error(R.drawable.err).into(imgChitiet);
     }
 
-    private void AcctionToolbar() {
-        setSupportActionBar(toolbarChitiet);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarChitiet.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
     private void Anhxa(){
-
-        toolbarChitiet = (Toolbar) findViewById(R.id.toolbarChitietsanpham);
         imgChitiet = (ImageView) findViewById(R.id.imageViewChitietsanpham);
         txtTen = (TextView) findViewById(R.id.textViewTenchitietsanpham);
         txtGia = (TextView) findViewById(R.id.textViewGiachitietsanpham);
