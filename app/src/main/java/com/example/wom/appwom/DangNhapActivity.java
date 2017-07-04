@@ -55,6 +55,7 @@ import static com.example.wom.appwom.DBHelper.APIConfig.URL_Login;
 import static com.example.wom.appwom.DBHelper.APIConfig.USERNAME;
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_HOTEN;
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
 
 public class DangNhapActivity extends AppCompatActivity {
 
@@ -230,15 +231,16 @@ public class DangNhapActivity extends AppCompatActivity {
                     Toast("Đăng nhập thành công");
                     // SET USER_ID
                     USER_LOGIN_ID = accList.get(i).get("id");
+                    USER_ROLE = accList.get(i).get("vaitro");
                     if (accList.get(i).get("vaitro").equals("1")) {
                         // đăng nhập thành công chuyển vào Trang Home
-                        Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                    }else{
-                        // đăng nhập thành công chuyển vào Trang Admin
-                        Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }else{
+                    // đăng nhập thành công chuyển vào Trang Admin
+                    Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
                     luuThongTin();
                     finish();
                     return;

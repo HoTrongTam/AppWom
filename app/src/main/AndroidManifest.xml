@@ -88,7 +88,15 @@
         <activity android:name=".SanphamAdminAcitivity" />
         <activity android:name=".DienthoaiAdmin" />
         <activity android:name=".LaptopAdmin" />
-        <activity android:name=".ThemmoiSanphamAdmin"></activity>
+        <activity android:name=".ThemmoiSanphamAdmin" />
+        <activity
+            android:name=".LichSuDonHangActivity"
+            android:label="Lịch sử đơn hàng"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
