@@ -34,7 +34,7 @@ public class ChitietSanphamLaptop extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chitiet_sanpham);
+        setContentView(R.layout.activity_chitiet_sanpham_laptop);
         Anhxa();
         GetInformation();
         CatchEventSpinner();

@@ -100,9 +100,16 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Laptop" />
+        </activity>
+        <activity
+            android:name=".Laptop"
+            android:label="Laptop"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SanPhamActivity" />
         </activity>
-        <activity android:name=".Laptop" />
         <activity
             android:name=".MainActivity"
             android:label="Trang quản lý WOM"
