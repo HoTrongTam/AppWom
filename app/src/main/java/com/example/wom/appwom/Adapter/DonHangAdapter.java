@@ -75,6 +75,7 @@ public class DonHangAdapter extends BaseAdapter {
         viewHolder.txtSoLuong.setText("Số lượng: "+donHang.getSoluong());
         if (donHang.getTrangthai() == 1){
             viewHolder.txtTrangThai.setText("Đã duyệt");
+            viewHolder.txtTrangThai.setTextColor(Color.BLUE);
         }else{
             viewHolder.txtTrangThai.setText("Chưa xác nhận đơn hàng");
             viewHolder.txtTrangThai.setTextColor(Color.GREEN);

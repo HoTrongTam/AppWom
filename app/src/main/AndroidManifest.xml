@@ -84,6 +84,7 @@
         <activity android:name=".LaptopAdmin" />
         <activity android:name=".ThemmoiSanphamAdmin" />
         <activity android:name=".GiohangActivity"></activity>
+        <activity android:name=".LichSuDonHangActivity"></activity>
     </application>
 
 </manifest>
