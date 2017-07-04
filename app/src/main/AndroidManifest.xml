@@ -50,17 +50,11 @@
             android:name=".ThongTinTaiKhoanActivity"
             android:label="Thông tin tài khoản"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".DoiMatKhauActivity"
             android:label="Đổi mật khẩu"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".SanPhamActivity"

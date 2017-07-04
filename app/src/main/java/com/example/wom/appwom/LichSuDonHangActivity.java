@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
 
 public class LichSuDonHangActivity extends AppCompatActivity {
 
@@ -81,8 +82,13 @@ public class LichSuDonHangActivity extends AppCompatActivity {
                             hinhsanpham = jsonObject.getString("hinhsanpham");
                             hoten = jsonObject.getString("hoten");
                             trangthai = jsonObject.getInt("tinhtrangdh");
-
-                            if (USER_LOGIN_ID.equals(id_tk + "")) {
+                            if (USER_ROLE.equals("1")){
+                                if (USER_LOGIN_ID.equals(id_tk + "")) {
+                                    DonHang donhang = new DonHang(id_donhang,id_sanpham,0,soluong,giasanpham,hoten,tensanpham,hinhsanpham, trangthai);
+                                    listDonHang.add(donhang);
+                                    donHangAdapter.notifyDataSetChanged();
+                                }
+                            }else{
                                 DonHang donhang = new DonHang(id_donhang,id_sanpham,0,soluong,giasanpham,hoten,tensanpham,hinhsanpham, trangthai);
                                 listDonHang.add(donhang);
                                 donHangAdapter.notifyDataSetChanged();
