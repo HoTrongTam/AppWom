@@ -1,7 +1,6 @@
 package com.example.wom.appwom.Adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +52,7 @@ public class LaptopAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_laptop,null);
 
             viewHolder.txtTenLaptop = (TextView)convertView.findViewById(R.id.txtTenlaptop);
+            viewHolder.txtGialaptop = (TextView)convertView.findViewById(R.id.txtGialaptop);
             viewHolder.txtMotaLaptop = (TextView)convertView.findViewById(R.id.txtMotalaptop);
             viewHolder.imgAnhLaptop = (ImageView)convertView.findViewById(R.id.imgLaptop);
             convertView.setTag(viewHolder);
@@ -63,6 +63,7 @@ public class LaptopAdapter extends BaseAdapter {
 
         Sanpham sanpham = (Sanpham)getItem(position);
         viewHolder.txtTenLaptop.setText(sanpham.getTensanpham());
+        viewHolder.txtGialaptop.setText("Giá : "+sanpham.getGiasanpham()+" VNĐ");
         viewHolder.txtMotaLaptop.setText(sanpham.getMotasanpham());
         Picasso.with(context).load(sanpham.getHinhsanpham())
                 .placeholder(R.drawable.load)
@@ -74,6 +75,6 @@ public class LaptopAdapter extends BaseAdapter {
     public class ViewHolder{
         ImageView imgAnhLaptop;
         TextView txtTenLaptop;
-        TextView txtMotaLaptop;
+        TextView txtMotaLaptop, txtGialaptop;
     }
 }
