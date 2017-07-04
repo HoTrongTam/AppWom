@@ -1,7 +1,7 @@
 package com.example.wom.appwom.Model;
 
 /**
- * Created by Quang on 7/4/2017.
+ * Created by admin on 7/4/2017.
  */
 
 public class Giohang {
@@ -11,7 +11,7 @@ public class Giohang {
     public String hinhsp;
     public int soluongsp;
 
-    public Giohang(int idsp, String tensp, long giasp, String hinhsp, int soluongsp){
+    public Giohang(int idsp, String tensp, long giasp, String hinhsp, int soluongsp) {
         this.idsp = idsp;
         this.tensp = tensp;
         this.giasp = giasp;

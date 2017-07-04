@@ -9,7 +9,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.wom.appwom.Adapter.GioHangAdapter;
-import com.example.wom.appwom.Model.Giohang;
 
 public class GiohangActivity extends AppCompatActivity {
     ListView lvGiohang;
