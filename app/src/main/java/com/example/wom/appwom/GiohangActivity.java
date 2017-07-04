@@ -22,6 +22,15 @@ public class GiohangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_giohang);
         Anhxa();
         CheckData();
+        EventUltil();
+    }
+
+    private void EventUltil() {
+        long tongtien = 0;
+        for(int i = 0; i < HomeActivity.mangGiohang.size();i++){
+            tongtien += HomeActivity.mangGiohang.get(i).getGiasp();
+        }
+        txtTongtien.setText(tongtien + " VNĐ");
     }
 
     private void CheckData() {
