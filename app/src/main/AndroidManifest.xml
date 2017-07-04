@@ -87,24 +87,31 @@
                 android:value=".SanPhamActivity" />
         </activity>
         <activity
-            android:name=".ChitietSanpham"
-            android:label="Giỏ hàng của bạn"
+        android:name=".ChitietSanpham"
+        android:label="Chi tiết sản phẩm"
+        android:screenOrientation="portrait">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".SanPhamActivity" />
+        <activity
+            android:name=".ChitietSanphamLaptop"
+            android:label="Chi tiết sản phẩm"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SanPhamActivity" />
         </activity>
-
         <activity android:name=".Laptop" />
         <activity
             android:name=".MainActivity"
             android:label="Trang quản lý WOM"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChitietSanphamLaptop" />
+
         <activity android:name=".SanphamAdminAcitivity" />
         <activity android:name=".DienthoaiAdmin" />
         <activity android:name=".LaptopAdmin" />
         <activity android:name=".ThemmoiSanphamAdmin" />
+        <activity android:name=".DonhangActivity"></activity>
     </application>
 
 </manifest>

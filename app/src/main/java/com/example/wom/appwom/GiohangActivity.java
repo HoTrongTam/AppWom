@@ -1,6 +1,7 @@
 package com.example.wom.appwom;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.wom.appwom.Adapter.GioHangAdapter;
+import com.example.wom.appwom.Util.CheckConnection;
 
 public class GiohangActivity extends AppCompatActivity {
     ListView lvGiohang;
@@ -71,7 +73,25 @@ public class GiohangActivity extends AppCompatActivity {
     }
 
     private void EventButton() {
-
+        btnTieptuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(HomeActivity.mangGiohang.size()>0){
+                    Intent intent = new Intent(getApplicationContext(),DonhangActivity.class);
+                    startActivity(intent);
+                }else{
+                    CheckConnection.ShowToast_Short
+                            (getApplicationContext(),"Giỏ hàng của bạn chưa có sản phẩm để thanh toán");
+                }
+            }
+        });
     }
 
     public static void EventUltil() {
