@@ -250,6 +250,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             Intent intent = new Intent(HomeActivity.this, DangNhapActivity.class);
             startActivity(intent);
+        }else if (id == R.id.nav_store) {
+            Intent intent = new Intent(HomeActivity.this, GiohangActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
