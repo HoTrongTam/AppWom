@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -20,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.Adapter.DienthoaiAdapter;
+import com.example.wom.appwom.Adapter.LaptopAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Util.CheckConnection;
@@ -32,16 +36,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+public class LaptopAdmin extends AppCompatActivity {
 
-
-public class Dienthoai extends AppCompatActivity {
 
     Toolbar toolbar;
-    ListView lv;
-    DienthoaiAdapter dienthoaiAdapter;
-    ArrayList<Sanpham> sanphams;
+    ListView listView;
+    LaptopAdapter adapter;
+    ArrayList<Sanpham> arrayList;
     int iddt = 0;
     int page = 1;
     View footerView;
@@ -52,8 +53,7 @@ public class Dienthoai extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dienthoai);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_laptop_admin);
         Anhxa();
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
 
@@ -63,20 +63,18 @@ public class Dienthoai extends AppCompatActivity {
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại internet");
         }
-
-
     }
 
     private void Loadmore() {
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Dienthoai.this, ChitietSanpham.class);
-                intent.putExtra("thongtinsanpham", sanphams.get(position));
+                Intent intent = new Intent(LaptopAdmin.this, ChitietSanphamLaptop.class);
+                intent.putExtra("thongtinsanphamlaptop", arrayList.get(position));
                 startActivity(intent);
             }
         });
-        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -88,8 +86,6 @@ public class Dienthoai extends AppCompatActivity {
                     isloading = true;
                     ThreadData threadData = new ThreadData();
                     threadData.start();
-
-
                 }
 
             }
@@ -100,8 +96,7 @@ public class Dienthoai extends AppCompatActivity {
         iddt = getIntent().getIntExtra("id_loaisanpham", -1);
     }
 
-    private void Getdata(int Page) {
-
+    private void Getdata(int page) {
         com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         String duongdan = APIConfig.DuongdanDT + String.valueOf(page);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, duongdan, new Response.Listener<String>() {
@@ -113,7 +108,7 @@ public class Dienthoai extends AppCompatActivity {
                 String Mota = "";
                 int idspdt = 0;
                 if (response != null && response.length() != 2) {
-                    lv.removeFooterView(footerView);
+                    listView.removeFooterView(footerView);
                     try {
                         JSONArray jsonArray = new JSONArray(response);
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -123,8 +118,8 @@ public class Dienthoai extends AppCompatActivity {
                             Mota = jsonObject.getString("motasanpham");
                             Hinhanh = jsonObject.getString("hinhsanpham");
                             idspdt = jsonObject.getInt("id_loaisanpham");
-                            sanphams.add(new Sanpham(id, Tendt, Hinhanh, Mota, idspdt));
-                            dienthoaiAdapter.notifyDataSetChanged();
+                            arrayList.add(new Sanpham(id, Tendt, Hinhanh, Mota, idspdt));
+                            adapter.notifyDataSetChanged();
 
                         }
                     } catch (JSONException e) {
@@ -132,7 +127,7 @@ public class Dienthoai extends AppCompatActivity {
                     }
                 } else {
                     limitdata = true;
-                    lv.removeFooterView(footerView);
+                    listView.removeFooterView(footerView);
                     Toast.makeText(getApplicationContext(), "Không còn dữ liệu", Toast.LENGTH_SHORT).show();
 
                 }
@@ -155,15 +150,37 @@ public class Dienthoai extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    private void Anhxa() {
 
-    public void Anhxa() {
-        lv = (ListView) findViewById(R.id.lvDienthoai);
-        sanphams = new ArrayList<>();
-        dienthoaiAdapter = new DienthoaiAdapter(getApplicationContext(), sanphams);
-        lv.setAdapter(dienthoaiAdapter);
+        listView = (ListView) findViewById(R.id.lvLaptopAdmin);
+        arrayList = new ArrayList<>();
+        adapter = new LaptopAdapter(getApplicationContext(), arrayList);
+        listView.setAdapter(adapter);
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         footerView = inflater.inflate(R.layout.progressbar, null);
         handler = new mHandler();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mnAdd:
+                Intent i = new Intent(LaptopAdmin.this, ThemmoiSanphamAdmin.class);
+                startActivity(i);
+                break;
+            default:
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class mHandler extends Handler {
@@ -171,7 +188,7 @@ public class Dienthoai extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    lv.addFooterView(footerView);
+                    listView.addFooterView(footerView);
                     break;
                 case 1:
                     Getdata(++page);

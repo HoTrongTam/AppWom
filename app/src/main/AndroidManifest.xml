@@ -84,7 +84,11 @@
             android:label="Trang quản lý WOM"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ChitietSanpham" />
-        <activity android:name=".ChitietSanphamLaptop"></activity>
+        <activity android:name=".ChitietSanphamLaptop" />
+        <activity android:name=".SanphamAdminAcitivity" />
+        <activity android:name=".DienthoaiAdmin" />
+        <activity android:name=".LaptopAdmin" />
+        <activity android:name=".ThemmoiSanphamAdmin"></activity>
     </application>
 
 </manifest>

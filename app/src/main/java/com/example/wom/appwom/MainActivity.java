@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     TextView txtEmailNV;
     ImageView imgAvatar;
     ArrayList<Taikhoan> accList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +87,8 @@ public class MainActivity extends AppCompatActivity
         txtEmailNV = (TextView) headerLayout.findViewById(R.id.txtMailMain);
         imgAvatar = (ImageView) headerLayout.findViewById(R.id.imgAvatarMain);
         sanphamArrayList = new ArrayList<>();
-        sanphamAdapter = new SanphamAdapter(getApplicationContext(),sanphamArrayList);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        sanphamAdapter = new SanphamAdapter(getApplicationContext(), sanphamArrayList);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(sanphamAdapter);
 
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
@@ -104,13 +105,13 @@ public class MainActivity extends AppCompatActivity
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_LoadProduct, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                if(response !=null){
+                if (response != null) {
                     int id = 0;
                     String tensp = "";
                     String hinhanhsp = "";
                     String mota = "";
-                    int idloai =0;
-                    for (int i=0;i<response.length();i++){
+                    int idloai = 0;
+                    for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject jsonObject = response.getJSONObject(i);
                             id = jsonObject.getInt("id");
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity
                             hinhanhsp = jsonObject.getString("hinhsanpham");
                             mota = jsonObject.getString("motasanpham");
                             idloai = jsonObject.getInt("id_loaisanpham");
-                            sanphamArrayList.add(new Sanpham(id,tensp,hinhanhsp,mota,idloai));
+                            sanphamArrayList.add(new Sanpham(id, tensp, hinhanhsp, mota, idloai));
                             sanphamAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, ThongTinTaiKhoanActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent(MainActivity.this, SanPhamActivity.class);
+            Intent intent = new Intent(MainActivity.this, SanphamAdminAcitivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
 
@@ -200,7 +201,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void getThongTinTaiKhoan(){
+
+    private void getThongTinTaiKhoan() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_getThongTinTaiKhoan2, new Response.Listener<JSONArray>() {
             @Override
@@ -219,13 +221,13 @@ public class MainActivity extends AppCompatActivity
                             email = jsonObject.getString("email");
                             hoten = jsonObject.getString("hoten");
                             anhdaidien = jsonObject.getString("anhdaidien");
-                            accList.add(new Taikhoan(email,ID,hoten,"",anhdaidien, ""));
-                            if (USER_LOGIN_ID.equals(ID+"")){
+                            accList.add(new Taikhoan(email, ID, hoten, "", anhdaidien, ""));
+                            if (USER_LOGIN_ID.equals(ID + "")) {
                                 txtHoTenNV.setText(hoten);
                                 txtEmailNV.setText(email);
-                                if (!anhdaidien.equals("R.mipmap.ic_launcher")){
+                                if (!anhdaidien.equals("R.mipmap.ic_launcher")) {
                                     Picasso.with(getApplicationContext()).load(anhdaidien).into(imgAvatar);
-                                }else{
+                                } else {
                                     Picasso.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(imgAvatar);
                                 }
 
