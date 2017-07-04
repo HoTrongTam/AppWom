@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,14 +17,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.wom.appwom.Adapter.SanphamAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
+import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Model.Taikhoan;
 import com.example.wom.appwom.Util.CheckConnection;
 import com.squareup.picasso.Picasso;
@@ -33,6 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
@@ -41,6 +45,10 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // Cấu hình NavigationView
+    @BindView(R.id.lvMainsp)
+    RecyclerView recyclerView;
+    ArrayList<Sanpham> sanphamArrayList;
+    SanphamAdapter sanphamAdapter;
     TextView txtHoTenNV;
     TextView txtEmailNV;
     ImageView imgAvatar;
@@ -77,14 +85,60 @@ public class MainActivity extends AppCompatActivity
         txtHoTenNV = (TextView) headerLayout.findViewById(R.id.txtNameMain);
         txtEmailNV = (TextView) headerLayout.findViewById(R.id.txtMailMain);
         imgAvatar = (ImageView) headerLayout.findViewById(R.id.imgAvatarMain);
+        sanphamArrayList = new ArrayList<>();
+        sanphamAdapter = new SanphamAdapter(getApplicationContext(),sanphamArrayList);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerView.setAdapter(sanphamAdapter);
 
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             getThongTinTaiKhoan();
+            GetdataSanpham();
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();
         }
     }
+
+    private void GetdataSanpham() {
+        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_LoadProduct, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if(response !=null){
+                    int id = 0;
+                    String tensp = "";
+                    String hinhanhsp = "";
+                    String mota = "";
+                    int idloai =0;
+                    for (int i=0;i<response.length();i++){
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            id = jsonObject.getInt("id");
+                            tensp = jsonObject.getString("tensanpham");
+                            hinhanhsp = jsonObject.getString("hinhsanpham");
+                            mota = jsonObject.getString("motasanpham");
+                            idloai = jsonObject.getInt("id_loaisanpham");
+                            sanphamArrayList.add(new Sanpham(id,tensp,hinhanhsp,mota,idloai));
+                            sanphamAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
+
+    }
+
 
     @Override
     public void onBackPressed() {
