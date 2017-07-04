@@ -84,7 +84,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ChitietSanpham" />
+                android:value=".SanPhamActivity" />
         </activity>
         <activity
             android:name=".ChitietSanpham"
