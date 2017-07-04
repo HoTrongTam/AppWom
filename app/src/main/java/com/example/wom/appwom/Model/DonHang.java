@@ -5,7 +5,7 @@ package com.example.wom.appwom.Model;
  */
 
 public class DonHang {
-    int id_donhang, id_sanpham, id_chitietdonhang, soluong, gia;
+    int id_donhang, id_sanpham, id_chitietdonhang, soluong, gia,trangthai;
     String nguoimua, tensanpham, anhsanpham;
 
     public DonHang() {
@@ -19,7 +19,7 @@ public class DonHang {
         this.gia = gia;
     }
 
-    public DonHang(int id_donhang, int id_sanpham, int id_chitietdonhang, int soluong, int gia, String nguoimua, String tensanpham, String anhsanpham) {
+    public DonHang(int id_donhang, int id_sanpham, int id_chitietdonhang, int soluong, int gia, String nguoimua, String tensanpham, String anhsanpham, int trangthai) {
         this.id_donhang = id_donhang;
         this.id_sanpham = id_sanpham;
         this.id_chitietdonhang = id_chitietdonhang;
@@ -28,6 +28,15 @@ public class DonHang {
         this.nguoimua = nguoimua;
         this.tensanpham = tensanpham;
         this.anhsanpham = anhsanpham;
+        this.trangthai = trangthai;
+    }
+
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
     }
 
     public String getNguoimua() {

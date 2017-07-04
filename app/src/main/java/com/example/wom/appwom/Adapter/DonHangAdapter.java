@@ -1,6 +1,7 @@
 package com.example.wom.appwom.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class DonHangAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        public TextView txtTenSP, txtSoLuong, txtNguoiMua;
+        public TextView txtTenSP, txtSoLuong, txtNguoiMua, txtTrangThai;
         public ImageView imgSanPham;
     }
 
@@ -58,6 +59,7 @@ public class DonHangAdapter extends BaseAdapter {
             viewHolder.txtSoLuong = (TextView) convertView.findViewById(R.id.txtSoLuong);
             viewHolder.txtTenSP = (TextView) convertView.findViewById(R.id.txtTenSanPham);
             viewHolder.txtNguoiMua = (TextView) convertView.findViewById(R.id.txtTenNguoiMua);
+            viewHolder.txtTrangThai = (TextView) convertView.findViewById(R.id.txtTrangThai);
             viewHolder.imgSanPham = (ImageView) convertView.findViewById(R.id.imgSanPhamDonHang);
             convertView.setTag(viewHolder);
 
@@ -71,6 +73,12 @@ public class DonHangAdapter extends BaseAdapter {
         viewHolder.txtNguoiMua.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txtTenSP.setText("Tên SP: "+donHang.getTensanpham());
         viewHolder.txtSoLuong.setText("Số lượng: "+donHang.getSoluong());
+        if (donHang.getTrangthai() == 1){
+            viewHolder.txtTrangThai.setText("Đã duyệt");
+        }else{
+            viewHolder.txtTrangThai.setText("Chưa xác nhận đơn hàng");
+            viewHolder.txtTrangThai.setTextColor(Color.GREEN);
+        }
         Picasso.with(context).load(donHang.getAnhsanpham())
                 .placeholder(R.drawable.load)
                 .error(R.drawable.err)

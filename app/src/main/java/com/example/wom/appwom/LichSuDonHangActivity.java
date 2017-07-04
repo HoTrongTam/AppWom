@@ -67,6 +67,7 @@ public class LichSuDonHangActivity extends AppCompatActivity {
                     String tensanpham = "";
                     String hinhsanpham = "";
                     String hoten = "";
+                    int trangthai = 0;
                     for (int i = 0; i < response.length(); i++) {
                         try {
 
@@ -79,9 +80,10 @@ public class LichSuDonHangActivity extends AppCompatActivity {
                             tensanpham = jsonObject.getString("tensanpham");
                             hinhsanpham = jsonObject.getString("hinhsanpham");
                             hoten = jsonObject.getString("hoten");
+                            trangthai = jsonObject.getInt("tinhtrangdh");
 
                             if (USER_LOGIN_ID.equals(id_tk + "")) {
-                                DonHang donhang = new DonHang(id_donhang,id_sanpham,0,soluong,giasanpham,hoten,tensanpham,hinhsanpham);
+                                DonHang donhang = new DonHang(id_donhang,id_sanpham,0,soluong,giasanpham,hoten,tensanpham,hinhsanpham, trangthai);
                                 listDonHang.add(donhang);
                                 donHangAdapter.notifyDataSetChanged();
                             }
