@@ -50,11 +50,17 @@
             android:name=".ThongTinTaiKhoanActivity"
             android:label="Thông tin tài khoản"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".DoiMatKhauActivity"
             android:label="Đổi mật khẩu"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".SanPhamActivity"
@@ -72,19 +78,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SanPhamActivity" />
         </activity>
+        <activity
+            android:name=".GiohangActivity"
+            android:label="Giỏ hàng của bạn"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ChitietSanpham" />
+        </activity>
+        <activity
+            android:name=".ChitietSanpham"
+            android:label="Giỏ hàng của bạn"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SanPhamActivity" />
+        </activity>
+
         <activity android:name=".Laptop" />
         <activity
             android:name=".MainActivity"
             android:label="Trang quản lý WOM"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChitietSanpham" />
         <activity android:name=".ChitietSanphamLaptop" />
         <activity android:name=".SanphamAdminAcitivity" />
         <activity android:name=".DienthoaiAdmin" />
         <activity android:name=".LaptopAdmin" />
         <activity android:name=".ThemmoiSanphamAdmin" />
-        <activity android:name=".GiohangActivity"></activity>
-        <activity android:name=".LichSuDonHangActivity"></activity>
     </application>
 
 </manifest>

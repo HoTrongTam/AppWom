@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 public class ChitietSanpham extends AppCompatActivity {
 
-    Toolbar toolbarChitiet;
+    Toolbar toolbarChitiet, toolbar;
     ImageView imgChitiet;
     TextView txtTen, txtGia, txtMota;
     Spinner spinner;
@@ -36,7 +36,7 @@ public class ChitietSanpham extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chitiet_sanpham);
         Anhxa();
-        AcctionToolbar();
+      //  AcctionToolbar();
         GetInformation();
         CatchEventSpinner();
         EventButton();

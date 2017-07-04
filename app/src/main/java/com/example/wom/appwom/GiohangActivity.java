@@ -14,14 +14,14 @@ public class GiohangActivity extends AppCompatActivity {
     ListView lvGiohang;
     TextView txtThongbao, txtTongtien;
     Button btnThanhToan, btnTieptuc;
-    Toolbar toolbarGiohang;
+    Toolbar  toolbar;
     GioHangAdapter gioHangAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giohang);
         Anhxa();
-        ActionToolbar();
+      //  ActionToolbar();
         CheckData();
     }
 
@@ -37,24 +37,12 @@ public class GiohangActivity extends AppCompatActivity {
         }
     }
 
-    private void ActionToolbar() {
-        setSupportActionBar(toolbarGiohang);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarGiohang.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
     public void Anhxa(){
         lvGiohang = (ListView)findViewById(R.id.listViewGiohang);
         txtThongbao = (TextView)findViewById(R.id.textViewThongbao);
         txtTongtien = (TextView)findViewById(R.id.textViewTongtien);
         btnThanhToan = (Button)findViewById(R.id.ButtonThanhtoan);
         btnTieptuc = (Button)findViewById(R.id.ButtonTieptucmua);
-        toolbarGiohang = (Toolbar)findViewById(R.id.toolbarGiohang);
         gioHangAdapter = new GioHangAdapter( GiohangActivity.this,HomeActivity.mangGiohang);
         lvGiohang.setAdapter(gioHangAdapter);
 
