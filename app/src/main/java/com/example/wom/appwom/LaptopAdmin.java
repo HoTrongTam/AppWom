@@ -1,10 +1,10 @@
 package com.example.wom.appwom;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.wom.appwom.Adapter.DienthoaiAdapter;
 import com.example.wom.appwom.Adapter.LaptopAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Sanpham;
@@ -43,6 +42,7 @@ public class LaptopAdmin extends AppCompatActivity {
     ListView listView;
     LaptopAdapter adapter;
     ArrayList<Sanpham> arrayList;
+
     int iddt = 0;
     int page = 1;
     View footerView;
@@ -104,6 +104,7 @@ public class LaptopAdmin extends AppCompatActivity {
             public void onResponse(String response) {
                 int id = 0;
                 String Tendt = "";
+                int Gia = 0;
                 String Hinhanh = "";
                 String Mota = "";
                 int idspdt = 0;
@@ -115,10 +116,11 @@ public class LaptopAdmin extends AppCompatActivity {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             id = jsonObject.getInt("id");
                             Tendt = jsonObject.getString("tensanpham");
+                            Gia = jsonObject.getInt("giasanpham");
                             Mota = jsonObject.getString("motasanpham");
                             Hinhanh = jsonObject.getString("hinhsanpham");
                             idspdt = jsonObject.getInt("id_loaisanpham");
-                            arrayList.add(new Sanpham(id, Tendt, Hinhanh, Mota, idspdt));
+                            arrayList.add(new Sanpham(id, Tendt, Gia, Hinhanh, Mota, idspdt));
                             adapter.notifyDataSetChanged();
 
                         }

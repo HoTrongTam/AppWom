@@ -1,10 +1,10 @@
 package com.example.wom.appwom;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -30,9 +30,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class Laptop extends AppCompatActivity {
 
@@ -105,6 +102,7 @@ public class Laptop extends AppCompatActivity {
             public void onResponse(String response) {
                 int id = 0;
                 String Tendt = "";
+                int Gia = 0;
                 String Hinhanh = "";
                 String Mota = "";
                 int idspdt = 0;
@@ -116,10 +114,11 @@ public class Laptop extends AppCompatActivity {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             id = jsonObject.getInt("id");
                             Tendt = jsonObject.getString("tensanpham");
+                            Gia = jsonObject.getInt("giasanpham");
                             Mota = jsonObject.getString("motasanpham");
                             Hinhanh = jsonObject.getString("hinhsanpham");
                             idspdt = jsonObject.getInt("id_loaisanpham");
-                            sanphamArrayList.add(new Sanpham(id, Tendt, Hinhanh, Mota, idspdt));
+                            sanphamArrayList.add(new Sanpham(id, Tendt, Gia, Hinhanh, Mota, idspdt));
                             adapter.notifyDataSetChanged();
 
                         }

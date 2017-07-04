@@ -3,18 +3,18 @@ package com.example.wom.appwom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -28,6 +28,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.Adapter.SanphamAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
+import com.example.wom.appwom.Model.Giohang;
 import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Model.Taikhoan;
 import com.example.wom.appwom.Util.CheckConnection;
@@ -51,7 +52,7 @@ import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    public static ArrayList<Giohang> mangGiohang;
     @BindView(R.id.viewlipper)
     ViewFlipper viewFlipper;
     @BindView(R.id.recyclerview)
@@ -87,6 +88,7 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+
     private void Getdulieusanpham() {
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(APIConfig.URL_LoadProduct, new Response.Listener<JSONArray>() {
@@ -95,6 +97,7 @@ public class HomeActivity extends AppCompatActivity
                 if (response != null) {
                     int ID = 0;
                     String tensanpham = "";
+                    int giasanpham = 0;
                     String hinhanhsanpham = "";
                     String motasanpham = "";
                     int IDsanpham = 0;
@@ -103,10 +106,11 @@ public class HomeActivity extends AppCompatActivity
                             JSONObject jsonObject = response.getJSONObject(i);
                             ID = jsonObject.getInt("id");
                             tensanpham = jsonObject.getString("tensanpham");
+                            giasanpham = jsonObject.getInt("giasanpham");
                             hinhanhsanpham = jsonObject.getString("hinhsanpham");
                             motasanpham = jsonObject.getString("motasanpham");
                             IDsanpham = jsonObject.getInt("id_loaisanpham");
-                            mangsp.add(new Sanpham(ID,tensanpham,hinhanhsanpham,motasanpham,IDsanpham));
+                            mangsp.add(new Sanpham(ID,tensanpham,giasanpham,hinhanhsanpham,motasanpham,IDsanpham));
                             sanphamAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
@@ -169,6 +173,11 @@ public class HomeActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView.setAdapter(sanphamAdapter);
         accList = new ArrayList<>();
+        if(mangGiohang != null){
+
+        }else{
+            mangGiohang = new ArrayList<>();
+        }
     }
 
     private void ActionViewFlipper() {

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/mnAdd"
+    <item android:id="@+id/menuGiohang"
         android:icon="@drawable/shoppingcart"
-        app:showAsAction="ifRoom">
-
-    </item>
-
+        app:showAsAction="always"/>
 </menu>

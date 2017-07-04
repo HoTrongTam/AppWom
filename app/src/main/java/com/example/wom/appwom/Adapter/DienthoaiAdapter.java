@@ -1,7 +1,6 @@
 package com.example.wom.appwom.Adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,7 @@ public class DienthoaiAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        public TextView txtTendt, txtMota;
+        public TextView txtTendt, txtMota, txtGia;
         public ImageView imgAnhdt;
     }
 
@@ -59,6 +58,7 @@ public class DienthoaiAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_dienthoai, null);
             viewHolder.txtTendt = (TextView) convertView.findViewById(R.id.txtTenDienthoai);
+            viewHolder.txtGia = (TextView)convertView.findViewById(R.id.txtGiaDienthoai);
             viewHolder.imgAnhdt = (ImageView) convertView.findViewById(R.id.imgDienthoai);
             viewHolder.txtMota = (TextView) convertView.findViewById(R.id.txtMotaDienthoai);
             convertView.setTag(viewHolder);
@@ -69,6 +69,7 @@ public class DienthoaiAdapter extends BaseAdapter {
 
         Sanpham sanpham = (Sanpham) getItem(position);
         viewHolder.txtTendt.setText(sanpham.getTensanpham());
+        viewHolder.txtGia.setText("Giá : "+sanpham.getGiasanpham()+" VNĐ");
         viewHolder.txtMota.setMaxLines(2);
         viewHolder.txtMota.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txtMota.setText(sanpham.getMotasanpham());

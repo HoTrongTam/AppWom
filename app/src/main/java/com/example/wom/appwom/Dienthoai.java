@@ -1,10 +1,10 @@
 package com.example.wom.appwom;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -109,6 +108,7 @@ public class Dienthoai extends AppCompatActivity {
             public void onResponse(String response) {
                 int id = 0;
                 String Tendt = "";
+                int Gia = 0;
                 String Hinhanh = "";
                 String Mota = "";
                 int idspdt = 0;
@@ -120,10 +120,11 @@ public class Dienthoai extends AppCompatActivity {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             id = jsonObject.getInt("id");
                             Tendt = jsonObject.getString("tensanpham");
+                            Gia = jsonObject.getInt("giasanpham");
                             Mota = jsonObject.getString("motasanpham");
                             Hinhanh = jsonObject.getString("hinhsanpham");
                             idspdt = jsonObject.getInt("id_loaisanpham");
-                            sanphams.add(new Sanpham(id, Tendt, Hinhanh, Mota, idspdt));
+                            sanphams.add(new Sanpham(id, Tendt,Gia , Hinhanh, Mota, idspdt));
                             dienthoaiAdapter.notifyDataSetChanged();
 
                         }

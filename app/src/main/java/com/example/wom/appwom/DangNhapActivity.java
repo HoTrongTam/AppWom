@@ -1,60 +1,32 @@
 package com.example.wom.appwom;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wom.appwom.DBHelper.ConnectionClass;
 import com.example.wom.appwom.DBHelper.HttpHandler;
-import com.example.wom.appwom.Model.Taikhoan;
-import com.example.wom.appwom.Util.CheckConnection;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.wom.appwom.DBHelper.APIConfig.URL_Login;
-import static com.example.wom.appwom.DBHelper.APIConfig.USERNAME;
-import static com.example.wom.appwom.DBHelper.APIConfig.USER_HOTEN;
-import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
 
 public class DangNhapActivity extends AppCompatActivity {
 
@@ -82,6 +54,7 @@ public class DangNhapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
         ButterKnife.bind(this);
+
         accList = new ArrayList<>();
                 /*- Progress -*/
         mProgress =new ProgressDialog(this);
@@ -89,7 +62,9 @@ public class DangNhapActivity extends AppCompatActivity {
         mProgress.setTitle(titleId);
         mProgress.setCancelable(false);
         mProgress.setMessage("Vui lòng chờ trong giây lát...");
+
     }
+
     @OnClick({R.id.btnDangNhap ,R.id.btnNhapLai})
     public void submit(Button button) {
         String user = edtUser.getText().toString();
@@ -104,17 +79,7 @@ public class DangNhapActivity extends AppCompatActivity {
              Toast("Không được bỏ trống mật khẩu đăng nhập");
                 return;
             }else {
-                mProgress.show();
-                Runnable progressRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        // xác nhận đăng nhập
-                        new GetAccounts().execute();
-                        mProgress.cancel();
-                    }
-                };
-                Handler pdCanceller = new Handler();
-                pdCanceller.postDelayed(progressRunnable, 3000);
+                new GetAccounts().execute();
             }
         } else if (button.getId() == R.id.btnNhapLai){
             edtUser.setText(null);
@@ -160,6 +125,7 @@ public class DangNhapActivity extends AppCompatActivity {
             String matkhau = pref.getString("mk", "");
             edtUser.setText(taikhoan);
             edtMatKhau.setText(matkhau);
+
         }
         chkLuuMatKhau.setChecked(chk);
     }
@@ -174,7 +140,9 @@ public class DangNhapActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
+
             String jsonStr = sh.makeServiceCall(URL_Login);
+
            // Log.e(TAG, "Kiểm tra url: " + jsonStr);
             if (jsonStr != null) {
                 try {
@@ -186,12 +154,13 @@ public class DangNhapActivity extends AppCompatActivity {
                         String id = c.getString("id_tk");
                         String matkhau = c.getString("matkhau");
                         String email = c.getString("email");
-                        String vaitro = c.getString("vaitro");
+
                         HashMap<String, String> account = new HashMap<>();
+
                         account.put("id", id);
                         account.put("matkhau", matkhau);
                         account.put("email", email);
-                        account.put("vaitro", vaitro);
+
                         accList.add(account);
                     }
                 } catch (final JSONException e) {
@@ -204,7 +173,9 @@ public class DangNhapActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                         }
                     });
+
                 }
+
             } else {
                 Log.e(TAG, "Không thể kết nối với server.");
                 runOnUiThread(new Runnable() {
@@ -216,6 +187,7 @@ public class DangNhapActivity extends AppCompatActivity {
                     }
                 });
             }
+
             return null;
         }
 
@@ -228,19 +200,12 @@ public class DangNhapActivity extends AppCompatActivity {
             for (int i = 0; i < accList.size();i++){
                 if (accList.get(i).get("email").equals(user) && accList.get(i).get("matkhau").equals(matkhau)){
                     Toast("Đăng nhập thành công");
-                    // SET USER_ID
-                    USER_LOGIN_ID = accList.get(i).get("id");
-                    if (accList.get(i).get("vaitro").equals("1")) {
-                        // đăng nhập thành công chuyển vào Trang Home
-                        Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                    }else{
-                        // đăng nhập thành công chuyển vào Trang Admin
-                        Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
+                    // đăng nhập thành công chuyển vào Trang Home
+                    Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
+                    startActivity(intent);
                     luuThongTin();
                     finish();
+                    mProgress.dismiss();
                     return;
                 }
             }

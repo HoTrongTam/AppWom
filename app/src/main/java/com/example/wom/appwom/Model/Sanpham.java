@@ -9,12 +9,14 @@ import java.io.Serializable;
 public class Sanpham implements Serializable{
     public int id;
     public String Tensanpham;
+    public int Giasanpham;
     public String Hinhsanpham;
     public String Motasanpham;
     public int IDSanpham;
-    public Sanpham(int id, String tensanpham, String hinhsanpham, String motasanpham, int IDSanpham) {
+    public Sanpham(int id, String tensanpham,int giasanpham, String hinhsanpham, String motasanpham, int IDSanpham) {
         this.id = id;
         Tensanpham = tensanpham;
+        Giasanpham = giasanpham;
         Hinhsanpham = hinhsanpham;
         Motasanpham = motasanpham;
         this.IDSanpham = IDSanpham;
@@ -34,6 +36,10 @@ public class Sanpham implements Serializable{
     public void setTensanpham(String tensanpham) {
         Tensanpham = tensanpham;
     }
+
+    public int getGiasanpham(){ return Giasanpham;}
+
+    public void setGiasanpham(int giasanpham){ Giasanpham = giasanpham;}
 
     public String getHinhsanpham() {
         return Hinhsanpham;
