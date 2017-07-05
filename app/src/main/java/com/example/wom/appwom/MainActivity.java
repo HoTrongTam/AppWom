@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, ThongTinTaiKhoanActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery2) {
-            Intent intent = new Intent(MainActivity.this, SanPhamActivity.class);
+            Intent intent = new Intent(MainActivity.this, SanphamAdminAcitivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(MainActivity.this, LichSuDonHangActivity.class);

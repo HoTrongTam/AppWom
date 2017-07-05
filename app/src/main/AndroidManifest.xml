@@ -91,9 +91,6 @@
         android:label="Chi tiết sản phẩm"
         android:screenOrientation="portrait">
         </activity>
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".SanPhamActivity" />
         <activity
             android:name=".ChitietSanphamLaptop"
             android:label="Chi tiết sản phẩm"
