@@ -4,10 +4,10 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/profile"
             android:title="Thông tin của bạn" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_gallery2"
             android:icon="@drawable/product"
             android:title="Sản Phẩm" />
         <item
