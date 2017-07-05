@@ -34,6 +34,8 @@ public class APIConfig {
     public static final String QUANGCAO_03 = "https://cdn.mediamart.vn/News/mua-vaio-rinh-qua-xperia-cung-media-mart-924201273231am.jpg";
     public static final String QUANGCAO_04 = "http://cdn.images.express.co.uk/img/dynamic/59/590x/blackberry-keyone-uk-price-release-date-mwc-2017-772697.jpg";
     public static final String URL_getDonHang = "http://"+locahost+":8081/WOM/getDonHang.php";
+    public static final String URL_insertDonHang = "http://"+locahost+":8081/WOM/insertDonHang.php";
+    public static final String URL_insertChiTietDonHang = "http://"+locahost+":8081/WOM/insertChiTietDonHang.php";
     // Random kiểu chữ và số
     SecureRandom random = new SecureRandom();
     public String randomChu() {
