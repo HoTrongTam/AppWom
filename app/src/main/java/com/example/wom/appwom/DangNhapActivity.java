@@ -1,13 +1,12 @@
 package com.example.wom.appwom;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,45 +14,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wom.appwom.DBHelper.ConnectionClass;
 import com.example.wom.appwom.DBHelper.HttpHandler;
-import com.example.wom.appwom.Model.Taikhoan;
-import com.example.wom.appwom.Util.CheckConnection;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.wom.appwom.DBHelper.APIConfig.URL_Login;
-import static com.example.wom.appwom.DBHelper.APIConfig.USERNAME;
-import static com.example.wom.appwom.DBHelper.APIConfig.USER_HOTEN;
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
 
@@ -236,11 +210,11 @@ public class DangNhapActivity extends AppCompatActivity {
                         // đăng nhập thành công chuyển vào Trang Home
                     Intent intent = new Intent(DangNhapActivity.this, HomeActivity.class);
                     startActivity(intent);
-                }else{
+                    }else{
                     // đăng nhập thành công chuyển vào Trang Admin
                     Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
                     startActivity(intent);
-                }
+                    }
                     luuThongTin();
                     finish();
                     return;

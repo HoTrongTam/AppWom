@@ -1,8 +1,8 @@
 package com.example.wom.appwom;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,7 +13,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.Adapter.LoaisanphamAdapter;
-import com.example.wom.appwom.Adapter.SanphamAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
 import com.example.wom.appwom.Model.Loaisanpham;
 import com.example.wom.appwom.Util.CheckConnection;
@@ -24,15 +23,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SanphamAdminAcitivity extends AppCompatActivity {
 
     ArrayList<Loaisanpham> loaisanphams;
     LoaisanphamAdapter loaisanphamAdapter;
-    @BindView(R.id.lvLoaispAdmin)
+    //@BindView(R.id.lvLoaispAdmin)
     ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +83,7 @@ public class SanphamAdminAcitivity extends AppCompatActivity {
     }
 
     public void Anhxa() {
+        listView = (ListView)findViewById(R.id.lvLoaispAdmin);
         loaisanphams = new ArrayList<>();
         loaisanphamAdapter = new LoaisanphamAdapter(getApplicationContext(), loaisanphams);
         listView.setAdapter(loaisanphamAdapter);

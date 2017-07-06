@@ -52,8 +52,8 @@ public class Laptop extends AppCompatActivity {
         Anhxa();
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
 
-            Getidloaisp();
             Getdata(page);
+            Getidloaisp();
             LoadMore();
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn vui lòng kiểm tra lại kết nối");

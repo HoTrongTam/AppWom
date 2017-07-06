@@ -8,7 +8,7 @@ import java.security.SecureRandom;
  */
 
 public class APIConfig {
-    public static final String locahost = "192.168.1.9";
+    public static final String locahost = "192.168.1.100";
     public static final String URL_Login = "http://"+locahost+":8081/WOM/getTaiKhoan.php";
     public static final String URL_getTaikhoan = "http://"+locahost+":8081/WOM/getTaiKhoan2.php";
     public static final String URL_getThongTinTaiKhoan = "http://"+locahost+":8081/WOM/getThongTinTaiKhoan.php";
@@ -36,6 +36,7 @@ public class APIConfig {
     public static final String URL_getDonHang = "http://"+locahost+":8081/WOM/getDonHang.php";
     public static final String URL_insertDonHang = "http://"+locahost+":8081/WOM/insertDonHang.php";
     public static final String URL_insertChiTietDonHang = "http://"+locahost+":8081/WOM/insertChiTietDonHang.php";
+    public static final String URL_insertSanpham = "http://"+locahost+":8081/WOM/insertSanPham.php";
     // Random kiểu chữ và số
     SecureRandom random = new SecureRandom();
     public String randomChu() {

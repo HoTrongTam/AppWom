@@ -329,7 +329,8 @@ public class DangKyActivity extends AppCompatActivity {
     // THông tin mặc định cho tài khoản vừa tạo thành công
     private void POST_THONGTIN(){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, APIConfig.URL_Register_Confirm, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                APIConfig.URL_Register_Confirm, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Toast(""+ response); // trả về id thông tin tài khoản
