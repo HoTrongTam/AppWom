@@ -118,6 +118,7 @@
         <activity android:name=".ThemmoiSanphamAdmin" />
         <activity android:name=".DonhangActivity"></activity>
         <activity android:name=".LichSuDonHangActivity"></activity>
+        <activity android:name=".TinNhanNDActivity"></activity>
     </application>
 
 </manifest>

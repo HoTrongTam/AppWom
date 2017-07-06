@@ -194,7 +194,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, DoiMatKhauActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-
+            Intent intent = new Intent(MainActivity.this, TinNhanNDActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_send) {
             Intent intent = new Intent(MainActivity.this, DangNhapActivity.class);
             startActivity(intent);

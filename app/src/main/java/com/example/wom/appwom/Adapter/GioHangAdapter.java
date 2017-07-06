@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wom.appwom.GiohangActivity;
+import com.example.wom.appwom.HomeActivity;
 import com.example.wom.appwom.Model.Giohang;
 import com.example.wom.appwom.R;
 import com.squareup.picasso.Picasso;
@@ -42,14 +44,16 @@ public class GioHangAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    public class ViewHolder{
+    class ViewHolder{
         public TextView txtTengiohang, txtGiagiohang;
         public ImageView imgGiohang;
         public Button btnTru, btnCong, btnGiatri;
     }
+    int dulieu;
+    ViewHolder viewHolder = null;
     @Override
-    public View getView(final int position, View view, ViewGroup viewGroup) {
-         ViewHolder viewHolder = null;
+    public View getView(final int position,View view, ViewGroup viewGroup) {
+
         if(view == null){
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -82,37 +86,43 @@ public class GioHangAdapter extends BaseAdapter {
             viewHolder.btnTru.setVisibility(View.VISIBLE);
         }
 
-        /*viewHolder.btnCong.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btnCong.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                int slMoi = Integer.parseInt(viewHolder.btnGiatri.getText().toString()) +1;
+            public void onClick(View view1) {
+                dulieu = Integer.parseInt(viewHolder.btnGiatri.getText().toString());
+                int slMoi = dulieu +1;
+
                 int slHientai = HomeActivity.mangGiohang.get(position).getSoluongsp();
                 long giaHientai = HomeActivity.mangGiohang.get(position).getGiasp();
                 HomeActivity.mangGiohang.get(position).setSoluongsp(slMoi);
                 long giaMoi = (giaHientai * slMoi)/slHientai;
                 HomeActivity.mangGiohang.get(position).setGiasp(giaMoi);
                 viewHolder.txtGiagiohang.setText(giaMoi + " VNĐ");
+                viewHolder.btnGiatri.setText(slMoi+"");
                 GiohangActivity.EventUltil();
+
                 if(slMoi > 9 ){
                     viewHolder.btnCong.setVisibility(View.INVISIBLE);
                     viewHolder.btnTru.setVisibility(View.VISIBLE);
                     viewHolder.btnGiatri.setText(String.valueOf(slMoi));
                 }else{
                     viewHolder.btnCong.setVisibility(View.VISIBLE);
-                    viewHolder.btnCong.setVisibility(View.VISIBLE);
+                    viewHolder.btnTru.setVisibility(View.VISIBLE);
                 }
-            }
+          }
         });
         viewHolder.btnTru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int slMoi = Integer.parseInt(viewHolder.btnGiatri.getText().toString()) -1;
+                dulieu = Integer.parseInt(viewHolder.btnGiatri.getText().toString());
+                int slMoi = dulieu -1;
                 int slHientai = HomeActivity.mangGiohang.get(position).getSoluongsp();
                 long giaHientai = HomeActivity.mangGiohang.get(position).getGiasp();
                 HomeActivity.mangGiohang.get(position).setSoluongsp(slMoi);
                 long giaMoi = (giaHientai * slMoi)/slHientai;
                 HomeActivity.mangGiohang.get(position).setGiasp(giaMoi);
                 viewHolder.txtGiagiohang.setText(giaMoi + " VNĐ");
+                viewHolder.btnGiatri.setText(slMoi+"");
                 GiohangActivity.EventUltil();
                 if(slMoi < 2 ){
                     viewHolder.btnCong.setVisibility(View.VISIBLE);
@@ -120,10 +130,10 @@ public class GioHangAdapter extends BaseAdapter {
                     viewHolder.btnGiatri.setText(String.valueOf(slMoi));
                 }else{
                     viewHolder.btnCong.setVisibility(View.VISIBLE);
-                    viewHolder.btnCong.setVisibility(View.VISIBLE);
+                    viewHolder.btnTru.setVisibility(View.VISIBLE);
                 }
             }
-        });*/
+        });
         return view;
     }
 }
