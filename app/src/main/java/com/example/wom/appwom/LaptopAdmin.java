@@ -69,8 +69,8 @@ public class LaptopAdmin extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(LaptopAdmin.this, ChitietSanphamLaptop.class);
-                intent.putExtra("thongtinsanphamlaptop", arrayList.get(position));
+                Intent intent = new Intent(LaptopAdmin.this, SuaSanPhamActivity.class);
+                intent.putExtra("thongtinsanpham", arrayList.get(position));
                 startActivity(intent);
             }
         });
