@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wom.appwom.GiohangActivity;
+import com.example.wom.appwom.HomeActivity;
 import com.example.wom.appwom.Model.Giohang;
 import com.example.wom.appwom.R;
 import com.squareup.picasso.Picasso;
@@ -42,14 +44,16 @@ public class GioHangAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    public class ViewHolder{
+    class ViewHolder{
         public TextView txtTengiohang, txtGiagiohang;
         public ImageView imgGiohang;
-        public Button btnGiatri;
+        public Button btnTru, btnCong, btnGiatri;
     }
+    int dulieu;
+    ViewHolder viewHolder = null;
     @Override
-    public View getView(final int position, View view, ViewGroup viewGroup) {
-         ViewHolder viewHolder = null;
+    public View getView(final int position,View view, ViewGroup viewGroup) {
+
         if(view == null){
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -57,6 +61,8 @@ public class GioHangAdapter extends BaseAdapter {
             viewHolder.txtTengiohang = (TextView) view.findViewById(R.id.textViewTengiohang);
             viewHolder.txtGiagiohang = (TextView) view.findViewById(R.id.textViewGiagiohang);
             viewHolder.imgGiohang = (ImageView) view.findViewById(R.id.imageViewGiohang);
+            viewHolder.btnCong = (Button) view.findViewById(R.id.ButtonCong);
+            viewHolder.btnTru = (Button) view.findViewById(R.id.ButtonTru);
             viewHolder.btnGiatri = (Button) view.findViewById(R.id.ButtonGiatri);
             view.setTag(viewHolder);
         }else{
@@ -69,8 +75,65 @@ public class GioHangAdapter extends BaseAdapter {
                 .error(R.drawable.err).into(viewHolder.imgGiohang);
         viewHolder.btnGiatri.setText(giohang.getSoluongsp()+"");
         int sl = Integer.parseInt(viewHolder.btnGiatri.getText().toString());
+        if(sl>=10){
+            viewHolder.btnCong.setVisibility(View.INVISIBLE);
+            viewHolder.btnTru.setVisibility(View.VISIBLE);
+        }else if(sl<=1){
+            viewHolder.btnCong.setVisibility(View.VISIBLE);
+            viewHolder.btnTru.setVisibility(View.INVISIBLE);
+        }else if(sl>=1){
+            viewHolder.btnCong.setVisibility(View.VISIBLE);
+            viewHolder.btnTru.setVisibility(View.VISIBLE);
+        }
 
+        viewHolder.btnCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view1) {
+                dulieu = Integer.parseInt(viewHolder.btnGiatri.getText().toString());
+                int slMoi = dulieu +1;
 
+                int slHientai = HomeActivity.mangGiohang.get(position).getSoluongsp();
+                long giaHientai = HomeActivity.mangGiohang.get(position).getGiasp();
+                HomeActivity.mangGiohang.get(position).setSoluongsp(slMoi);
+                long giaMoi = (giaHientai * slMoi)/slHientai;
+                HomeActivity.mangGiohang.get(position).setGiasp(giaMoi);
+                viewHolder.txtGiagiohang.setText(giaMoi + " VNĐ");
+                viewHolder.btnGiatri.setText(slMoi+"");
+                GiohangActivity.EventUltil();
+
+                if(slMoi > 9 ){
+                    viewHolder.btnCong.setVisibility(View.INVISIBLE);
+                    viewHolder.btnTru.setVisibility(View.VISIBLE);
+                    viewHolder.btnGiatri.setText(String.valueOf(slMoi));
+                }else{
+                    viewHolder.btnCong.setVisibility(View.VISIBLE);
+                    viewHolder.btnTru.setVisibility(View.VISIBLE);
+                }
+          }
+        });
+        viewHolder.btnTru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dulieu = Integer.parseInt(viewHolder.btnGiatri.getText().toString());
+                int slMoi = dulieu -1;
+                int slHientai = HomeActivity.mangGiohang.get(position).getSoluongsp();
+                long giaHientai = HomeActivity.mangGiohang.get(position).getGiasp();
+                HomeActivity.mangGiohang.get(position).setSoluongsp(slMoi);
+                long giaMoi = (giaHientai * slMoi)/slHientai;
+                HomeActivity.mangGiohang.get(position).setGiasp(giaMoi);
+                viewHolder.txtGiagiohang.setText(giaMoi + " VNĐ");
+                viewHolder.btnGiatri.setText(slMoi+"");
+                GiohangActivity.EventUltil();
+                if(slMoi < 2 ){
+                    viewHolder.btnCong.setVisibility(View.VISIBLE);
+                    viewHolder.btnTru.setVisibility(View.INVISIBLE);
+                    viewHolder.btnGiatri.setText(String.valueOf(slMoi));
+                }else{
+                    viewHolder.btnCong.setVisibility(View.VISIBLE);
+                    viewHolder.btnTru.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         return view;
     }
 }
