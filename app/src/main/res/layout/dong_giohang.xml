@@ -43,19 +43,27 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <Button
+                android:text="-"
+                android:focusable="false"
+                android:id="@+id/ButtonTru"
                 android:layout_marginTop="5dp"
-                android:textColor="#131313"
-                android:gravity="center"
                 android:textSize="30sp"
-                android:text="Số lượng: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
             <Button
                 android:focusable="false"
                 android:background="@null"
                 android:text="1"
                 android:id="@+id/ButtonGiatri"
+                android:layout_marginTop="5dp"
+                android:textSize="30sp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:focusable="false"
+                android:text="+"
+                android:id="@+id/ButtonCong"
                 android:layout_marginTop="5dp"
                 android:textSize="30sp"
                 android:layout_width="70dp"

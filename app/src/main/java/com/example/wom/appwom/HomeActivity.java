@@ -246,8 +246,8 @@ public class HomeActivity extends AppCompatActivity
             Intent intent = new Intent(HomeActivity.this, DoiMatKhauActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            Intent intent = new Intent(HomeActivity.this, TinNhanNDActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(HomeActivity.this, TinNhanNDActivity.class);
+            //startActivity(intent);
         } else if (id == R.id.nav_send) {
             Intent intent = new Intent(HomeActivity.this, DangNhapActivity.class);
             startActivity(intent);

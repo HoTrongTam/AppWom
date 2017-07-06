@@ -34,6 +34,7 @@ public class GiohangActivity extends AppCompatActivity {
         EventUltil();
         EventButton();
         CatchOnItemListView();
+
     }
 
     private void CatchOnItemListView() {
@@ -137,4 +138,5 @@ public class GiohangActivity extends AppCompatActivity {
         lvGiohang.setAdapter(gioHangAdapter);
 
     }
+
 }

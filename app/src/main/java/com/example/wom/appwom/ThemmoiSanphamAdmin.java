@@ -1,11 +1,13 @@
 package com.example.wom.appwom;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -80,6 +82,9 @@ public class ThemmoiSanphamAdmin extends AppCompatActivity {
                         }
                     };
                     requestQueue.add(stringRequest);
+                    Toast.makeText(ThemmoiSanphamAdmin.this,"Thêm thành công",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
                 }else{
                     CheckConnection.ShowToast_Short(getApplicationContext(),"Kiểm tra lại dữ liệu");
                 }
