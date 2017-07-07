@@ -12,10 +12,13 @@ import android.widget.TextView;
 import com.example.wom.appwom.ChitietSanpham;
 import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.R;
+import com.example.wom.appwom.SuaSanPhamActivity;
 import com.example.wom.appwom.Util.CheckConnection;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
 
 /**
  * Created by hotrongtam on 7/1/2017.
@@ -43,11 +46,19 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.MyViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ChitietSanpham.class);
-                    intent.putExtra("thongtinsanpham", arrSanpham.get(getPosition()));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    CheckConnection.ShowToast_Short(context,arrSanpham.get(getPosition()).getTensanpham());
-                    context.startActivity(intent);
+                    if(USER_ROLE.equals("1")){
+                        Intent intent = new Intent(context, ChitietSanpham.class);
+                        intent.putExtra("thongtinsanpham", arrSanpham.get(getPosition()));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        CheckConnection.ShowToast_Short(context, arrSanpham.get(getPosition()).getTensanpham());
+                        context.startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(context, SuaSanPhamActivity.class);
+                        intent.putExtra("thongtinsanpham", arrSanpham.get(getPosition()));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        CheckConnection.ShowToast_Short(context, arrSanpham.get(getPosition()).getTensanpham());
+                        context.startActivity(intent);
+                    }
                 }
             });
 

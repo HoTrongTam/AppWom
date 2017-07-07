@@ -3,9 +3,9 @@ package com.example.wom.appwom;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,7 +41,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
-import static com.example.wom.appwom.R.layout.dialog;
 
 public class SanPhamActivity extends AppCompatActivity {
 

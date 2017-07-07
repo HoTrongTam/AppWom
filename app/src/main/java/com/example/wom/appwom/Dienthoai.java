@@ -20,16 +20,12 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.Adapter.DienthoaiAdapter;
-import com.example.wom.appwom.Adapter.LoaisanphamAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
-import com.example.wom.appwom.Model.Loaisanpham;
 import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Util.CheckConnection;
 
@@ -87,9 +83,15 @@ public class Dienthoai extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Dienthoai.this, ChitietSanpham.class);
-                intent.putExtra("thongtinsanpham", sanphams.get(position));
-                startActivity(intent);
+                if(USER_ROLE.equals("1")) {
+                    Intent intent = new Intent(Dienthoai.this, ChitietSanpham.class);
+                    intent.putExtra("thongtinsanpham", sanphams.get(position));
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(Dienthoai.this, SuaSanPhamActivity.class);
+                    intent.putExtra("thongtinsanpham", sanphams.get(position));
+                    startActivity(intent);
+                }
             }
         });
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -239,4 +241,5 @@ public class Dienthoai extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
