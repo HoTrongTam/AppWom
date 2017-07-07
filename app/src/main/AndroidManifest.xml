@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.wom.appwom">
+    package="com.example.wom.appwom">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.READ_PROFILE"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -21,15 +21,15 @@
         <activity
             android:name=".HomeActivity"
             android:label="Trang chính"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".RegisterStoreActivity"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RegisterStoreActivity" />
         <activity
             android:name=".DangNhapActivity"
             android:label="Đăng nhập">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -37,14 +37,14 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DangNhapActivity"/>
+                android:value=".DangNhapActivity" />
         </activity>
         <activity
             android:name=".QuenMatKhauActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DangNhapActivity"/>
+                android:value=".DangNhapActivity" />
         </activity>
         <activity
             android:name=".ThongTinTaiKhoanActivity"
@@ -52,7 +52,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity"/>
+                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".DoiMatKhauActivity"
@@ -60,7 +60,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity"/>
+                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".SanPhamActivity"
@@ -68,7 +68,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity"/>
+                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".Dienthoai"
@@ -76,7 +76,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SanPhamActivity"/>
+                android:value=".SanPhamActivity" />
         </activity>
         <activity
             android:name=".GiohangActivity"
@@ -84,42 +84,30 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SanPhamActivity"/>
+                android:value=".SanPhamActivity" />
         </activity>
         <activity
             android:name=".ChitietSanpham"
             android:label="Chi tiết sản phẩm"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ChitietSanphamLaptop"
             android:label="Chi tiết sản phẩm"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Laptop"/>
-        </activity>
-        <activity
-            android:name=".Laptop"
-            android:label="Laptop"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SanPhamActivity"/>
+                android:value=".Laptop" />
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="Trang quản lý WOM"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SanphamAdminAcitivity"/>
-        <activity android:name=".DienthoaiAdmin"/>
-        <activity android:name=".LaptopAdmin"/>
-        <activity android:name=".ThemmoiSanphamAdmin"/>
-        <activity android:name=".DonhangActivity"/>
-        <activity android:name=".LichSuDonHangActivity"/>
-        <activity android:name=".TinNhanNDActivity"/>
-        <activity android:name=".SuaSanPhamActivity">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ThemmoiSanphamAdmin" />
+        <activity android:name=".DonhangActivity" />
+        <activity android:name=".LichSuDonHangActivity" />
+        <activity android:name=".TinNhanNDActivity" />
+        <activity android:name=".SuaSanPhamActivity"></activity>
+        <activity android:name=".ThemloaispAdmin"></activity>
     </application>
 
 </manifest>

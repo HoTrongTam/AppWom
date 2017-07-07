@@ -15,8 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,6 +42,10 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_01;
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_02;
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_03;
+import static com.example.wom.appwom.DBHelper.APIConfig.QUANGCAO_04;
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_LOGIN_ID;
 
 public class MainActivity extends AppCompatActivity
@@ -47,6 +54,8 @@ public class MainActivity extends AppCompatActivity
     // Cấu hình NavigationView
     @BindView(R.id.lvMainsp)
     RecyclerView recyclerView;
+    @BindView(R.id.vfliper)
+    ViewFlipper viewFlipper;
     ArrayList<Sanpham> sanphamArrayList;
     SanphamAdapter sanphamAdapter;
     TextView txtHoTenNV;
@@ -94,6 +103,7 @@ public class MainActivity extends AppCompatActivity
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             getThongTinTaiKhoan();
             GetdataSanpham();
+            ActionViewFlipper();
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();
@@ -185,7 +195,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, ThongTinTaiKhoanActivity.class);
             startActivity(intent);
         } else if (id == R.id.navproduct) {
-            Intent intent = new Intent(MainActivity.this, SanphamAdminAcitivity.class);
+            Intent intent = new Intent(MainActivity.this, SanPhamActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(MainActivity.this, LichSuDonHangActivity.class);
@@ -195,7 +205,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_share) {
             //Intent intent = new Intent(MainActivity.this, TinNhanNDActivity.class);
-           // startActivity(intent);
+            // startActivity(intent);
         } else if (id == R.id.nav_send) {
             Intent intent = new Intent(MainActivity.this, DangNhapActivity.class);
             startActivity(intent);
@@ -204,6 +214,30 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void ActionViewFlipper() {
+        ArrayList<String> mangquangcao = new ArrayList<>();
+        mangquangcao.add(QUANGCAO_01);
+        mangquangcao.add(QUANGCAO_02);
+        mangquangcao.add(QUANGCAO_03);
+        mangquangcao.add(QUANGCAO_04);
+
+        for (int i = 0; i < mangquangcao.size(); i++) {
+            ImageView imageView = new ImageView(getApplicationContext());
+            Picasso.with(getApplicationContext())
+                    .load(mangquangcao.get(i))
+                    .into(imageView);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            viewFlipper.addView(imageView);
+        }
+        viewFlipper.setFlipInterval(5000);
+        viewFlipper.setAutoStart(true);
+        Animation animation_slide_in_right = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_right);
+        Animation animation_slide_out_right = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_right);
+        viewFlipper.setInAnimation(animation_slide_in_right);
+        viewFlipper.setOutAnimation(animation_slide_out_right);
+
     }
 
     private void getThongTinTaiKhoan() {

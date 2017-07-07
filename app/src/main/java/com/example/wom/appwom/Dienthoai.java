@@ -7,6 +7,9 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -33,6 +36,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.ButterKnife;
+
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
 
 
 public class Dienthoai extends AppCompatActivity {
@@ -124,7 +129,7 @@ public class Dienthoai extends AppCompatActivity {
                             Mota = jsonObject.getString("motasanpham");
                             Hinhanh = jsonObject.getString("hinhsanpham");
                             idspdt = jsonObject.getInt("id_loaisanpham");
-                            sanphams.add(new Sanpham(id, Tendt,Gia , Hinhanh, Mota, idspdt));
+                            sanphams.add(new Sanpham(id, Tendt, Gia, Hinhanh, Mota, idspdt));
                             dienthoaiAdapter.notifyDataSetChanged();
 
                         }
@@ -196,5 +201,31 @@ public class Dienthoai extends AppCompatActivity {
             handler.sendMessage(message);
             super.run();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        if (USER_ROLE.equals("0")) {
+            inflater.inflate(R.menu.add, menu);
+        } else {
+            Toast.makeText(this, "err", Toast.LENGTH_SHORT).show();
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mnAdd:
+                Intent i = new Intent(Dienthoai.this, ThemmoiSanphamAdmin.class);
+                i.putExtra("id_loai", iddt);
+                startActivity(i);
+                break;
+            default:
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

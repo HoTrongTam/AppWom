@@ -8,7 +8,7 @@ import java.security.SecureRandom;
  */
 
 public class APIConfig {
-    public static final String locahost = "192.168.1.100";
+    public static final String locahost = "192.168.36.2";
     public static final String URL_Login = "http://"+locahost+":8081/WOM/getTaiKhoan.php";
     public static final String URL_getTaikhoan = "http://"+locahost+":8081/WOM/getTaiKhoan2.php";
     public static final String URL_getThongTinTaiKhoan = "http://"+locahost+":8081/WOM/getThongTinTaiKhoan.php";
@@ -32,6 +32,7 @@ public class APIConfig {
     public static final String URL_insertSanpham = "http://"+locahost+":8081/WOM/insertSanPham.php";
     public static final String URL_updateSanpham = "http://"+locahost+":8081/WOM/updateSanPham.php";
     public static final String URL_deleteSanpham = "http://"+locahost+":8081/WOM/deleteSanPham.php";
+    public static final String URL_insertLoai = "http://"+locahost+":8081/WOM/insertLoaisanpham.php";
     public static final String QUANGCAO_01 = "https://tinhte.cdnforo.com/store/2014/08/2572609_Hinh_2.jpg";
     public static final String QUANGCAO_02 = "http://znews-photo-td.zadn.vn/w480/Uploaded/OFH_oazszstq/2017_05_18/cothemthongtinveiphone801.jpg";
     public static final String QUANGCAO_03 = "https://cdn.mediamart.vn/News/mua-vaio-rinh-qua-xperia-cung-media-mart-924201273231am.jpg";
