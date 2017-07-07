@@ -8,7 +8,7 @@ import java.security.SecureRandom;
  */
 
 public class APIConfig {
-    public static final String locahost = "192.168.1.100";
+    public static final String locahost = "10.0.45.35";
     public static final String URL_Login = "http://"+locahost+":8081/WOM/getTaiKhoan.php";
     public static final String URL_getTaikhoan = "http://"+locahost+":8081/WOM/getTaiKhoan2.php";
     public static final String URL_getThongTinTaiKhoan = "http://"+locahost+":8081/WOM/getThongTinTaiKhoan.php";

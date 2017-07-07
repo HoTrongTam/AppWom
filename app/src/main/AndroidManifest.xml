@@ -34,6 +34,7 @@
         </activity>
         <activity
             android:name=".DangKyActivity"
+            android:label="Đăng ký"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,6 +42,7 @@
         </activity>
         <activity
             android:name=".QuenMatKhauActivity"
+            android:label="Quên mật khẩu"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -96,7 +98,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Laptop" />
+                android:value=".SanPhamActivity" />
         </activity>
         <activity
             android:name=".MainActivity"
