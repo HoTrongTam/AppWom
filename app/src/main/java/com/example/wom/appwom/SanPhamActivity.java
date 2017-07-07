@@ -11,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
+import static com.example.wom.appwom.R.layout.dialog;
 
 public class SanPhamActivity extends AppCompatActivity {
 
@@ -46,10 +49,12 @@ public class SanPhamActivity extends AppCompatActivity {
     LoaisanphamAdapter loaisanphamAdapter;
     @BindView(R.id.lvSanpham)
     ListView listLoaisp;
-
+    Dialog dialog;
+    EditText tens, hinhs;
     int idloaisp = 0;
     String tenloaisp = "";
     String hinhanhloaisp = "";
+    Button btSua, btRe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +66,17 @@ public class SanPhamActivity extends AppCompatActivity {
         Anhxa();
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             GetdulieuLoaisp();
-            if(USER_ROLE.equals("0")){
+            if (USER_ROLE.equals("0")) {
                 listLoaisp.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                         final int ide = loaisanphams.get(position).getIdloaisp();
+                        final String ten = loaisanphams.get(position).getTenloaisp();
+                        final String hinh = loaisanphams.get(position).getHinhanhloaisp();
                         final AlertDialog.Builder builder = new AlertDialog.Builder(SanPhamActivity.this);
-                        builder.setTitle("Xác nhận xóa sản phẩm");
-                        builder.setMessage("Bạn có chắc muốn xóa loại sản phẩm này");
-                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        builder.setTitle("Lựa chọn chức năng");
+                        builder.setMessage("Bạn muốn xóa hay sửa");
+                        builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int i) {
                                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -83,28 +90,66 @@ public class SanPhamActivity extends AppCompatActivity {
                                     public void onErrorResponse(VolleyError error) {
 
                                     }
-                                }){
+                                }) {
                                     @Override
                                     protected Map<String, String> getParams() throws AuthFailureError {
-                                        HashMap<String,String> hashMap = new HashMap<String, String>();
-                                        hashMap.put("id_loaisanpham",String.valueOf(ide));
+                                        HashMap<String, String> hashMap = new HashMap<String, String>();
+                                        hashMap.put("id_loaisanpham", String.valueOf(ide));
                                         return hashMap;
                                     }
                                 };
                                 requestQueue.add(stringRequest);
-                                Toast.makeText(SanPhamActivity.this, "Xoa thanh cong"+ide, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SanPhamActivity.this, "Xóa thành công" + ide, Toast.LENGTH_SHORT).show();
                                 loaisanphamAdapter.notifyDataSetChanged();
                                 finish();
 
 
                             }
                         });
-                        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton("Sửa", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                               builder.setCancelable(true);
+                                showDialog();
+                                tens.setText(ten);
+                                hinhs.setText(hinh);
+
+
+                                btSua.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                        StringRequest stringRequest = new StringRequest(Request.Method.POST, APIConfig.URL_updateLoai, new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                loaisanphams.clear();
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+
+                                            }
+                                        }) {
+                                            @Override
+                                            protected Map<String, String> getParams() throws AuthFailureError {
+                                                HashMap<String, String> hashMap = new HashMap<String, String>();
+                                                hashMap.put("id_loaisanpham", String.valueOf(ide));
+                                                hashMap.put("tenloaisanpham", tens.getText().toString());
+                                                hashMap.put("hinhloaisanpham", hinhs.getText().toString());
+
+
+                                                return hashMap;
+                                            }
+                                        };
+                                        //
+                                        requestQueue.add(stringRequest);
+                                        Toast.makeText(SanPhamActivity.this, "Sửa thành công" + tens.getText().toString() + "", Toast.LENGTH_SHORT).show();
+                                        loaisanphamAdapter.notifyDataSetChanged();
+                                    }
+                                });
                             }
                         });
+
+
                         builder.show();
 
                         Toast.makeText(SanPhamActivity.this, "admin", Toast.LENGTH_SHORT).show();
@@ -134,6 +179,17 @@ public class SanPhamActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void showDialog() {
+        dialog = new Dialog(SanPhamActivity.this);
+        dialog.setContentView(R.layout.dialog_sualoai);
+        dialog.show();
+        tens = (EditText) dialog.findViewById(R.id.edSuaten);
+        hinhs = (EditText) dialog.findViewById(R.id.edSuaHinh);
+        btSua = (Button) dialog.findViewById(R.id.btnSuaLoai);
+        btRe = (Button) dialog.findViewById(R.id.btnResetSua);
 
 
     }

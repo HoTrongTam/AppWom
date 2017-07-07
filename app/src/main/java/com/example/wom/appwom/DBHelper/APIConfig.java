@@ -34,6 +34,7 @@ public class APIConfig {
     public static final String URL_deleteSanpham = "http://"+locahost+":8081/WOM/deleteSanPham.php";
     public static final String URL_insertLoai = "http://"+locahost+":8081/WOM/insertLoaisanpham.php";
     public static final String URL_deleteLoai = "http://"+locahost+":8081/WOM/deleteLoai.php";
+    public static final String URL_updateLoai = "http://"+locahost+":8081/WOM/updateLoaisp.php";
     public static final String QUANGCAO_01 = "https://tinhte.cdnforo.com/store/2014/08/2572609_Hinh_2.jpg";
     public static final String QUANGCAO_02 = "http://znews-photo-td.zadn.vn/w480/Uploaded/OFH_oazszstq/2017_05_18/cothemthongtinveiphone801.jpg";
     public static final String QUANGCAO_03 = "https://cdn.mediamart.vn/News/mua-vaio-rinh-qua-xperia-cung-media-mart-924201273231am.jpg";
