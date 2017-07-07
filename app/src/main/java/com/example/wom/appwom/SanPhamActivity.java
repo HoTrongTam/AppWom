@@ -174,6 +174,7 @@ public class SanPhamActivity extends AppCompatActivity {
 
                 Intent i = new Intent(getApplicationContext(), Dienthoai.class);
                 i.putExtra("id_loaisanpham", loaisanphams.get(position).getIdloaisp());
+                i.putExtra("ten",loaisanphams.get(position).getTenloaisp());
                 startActivity(i);
 
             }

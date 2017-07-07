@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,12 +20,16 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.Adapter.DienthoaiAdapter;
+import com.example.wom.appwom.Adapter.LoaisanphamAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
+import com.example.wom.appwom.Model.Loaisanpham;
 import com.example.wom.appwom.Model.Sanpham;
 import com.example.wom.appwom.Util.CheckConnection;
 
@@ -52,6 +58,8 @@ public class Dienthoai extends AppCompatActivity {
     boolean isloading = false;
     mHandler handler;
     boolean limitdata = false;
+    ActionBar actionBar;
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,10 @@ public class Dienthoai extends AppCompatActivity {
             Getdata(page);
             Getidloaisp();
             Loadmore();
+            title = getIntent().getStringExtra("ten");
+            actionBar = getSupportActionBar();
+            actionBar.setTitle(Html.fromHtml("<small>" + title + "</small>"));
+
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại internet");
         }
@@ -103,7 +115,6 @@ public class Dienthoai extends AppCompatActivity {
     private void Getidloaisp() {
         iddt = getIntent().getIntExtra("id_loaisanpham", -1);
     }
-
     private void Getdata(int Page) {
 
         com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
