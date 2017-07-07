@@ -209,7 +209,7 @@ public class Dienthoai extends AppCompatActivity {
         if (USER_ROLE.equals("0")) {
             inflater.inflate(R.menu.add, menu);
         } else {
-            Toast.makeText(this, "err", Toast.LENGTH_SHORT).show();
+
         }
         return super.onCreateOptionsMenu(menu);
     }

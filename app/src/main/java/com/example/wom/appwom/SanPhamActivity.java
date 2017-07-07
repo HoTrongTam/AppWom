@@ -14,10 +14,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wom.appwom.Adapter.LoaisanphamAdapter;
 import com.example.wom.appwom.DBHelper.APIConfig;
@@ -29,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +61,57 @@ public class SanPhamActivity extends AppCompatActivity {
         Anhxa();
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             GetdulieuLoaisp();
+            if(USER_ROLE.equals("0")){
+                listLoaisp.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        final int ide = loaisanphams.get(position).getIdloaisp();
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(SanPhamActivity.this);
+                        builder.setTitle("Xác nhận xóa sản phẩm");
+                        builder.setMessage("Bạn có chắc muốn xóa loại sản phẩm này");
+                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST, APIConfig.URL_deleteLoai, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
+                                }){
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        HashMap<String,String> hashMap = new HashMap<String, String>();
+                                        hashMap.put("id_loaisanpham",String.valueOf(ide));
+                                        return hashMap;
+                                    }
+                                };
+                                requestQueue.add(stringRequest);
+                                Toast.makeText(SanPhamActivity.this, "Xoa thanh cong"+ide, Toast.LENGTH_SHORT).show();
+                                loaisanphamAdapter.notifyDataSetChanged();
+                                finish();
+
+
+                            }
+                        });
+                        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                               builder.setCancelable(true);
+                            }
+                        });
+                        builder.show();
+
+                        Toast.makeText(SanPhamActivity.this, "admin", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+            }
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();

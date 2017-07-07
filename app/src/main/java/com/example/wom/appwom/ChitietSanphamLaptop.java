@@ -16,6 +16,8 @@ import com.example.wom.appwom.Model.Giohang;
 import com.example.wom.appwom.Model.Sanpham;
 import com.squareup.picasso.Picasso;
 
+import static com.example.wom.appwom.DBHelper.APIConfig.USER_ROLE;
+
 public class ChitietSanphamLaptop extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -42,6 +44,9 @@ public class ChitietSanphamLaptop extends AppCompatActivity {
     }
 
     private void EventButton() {
+        if(USER_ROLE.equals("0")){
+            btnDatmua.setVisibility(View.INVISIBLE);
+        }else{
         btnDatmua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +79,7 @@ public class ChitietSanphamLaptop extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        }
     }
 
     private void CatchEventSpinner() {
@@ -108,5 +114,6 @@ public class ChitietSanphamLaptop extends AppCompatActivity {
         txtMota = (TextView) findViewById(R.id.textViewMotasanpham);
         spinner = (Spinner) findViewById(R.id.spinnerChitietsanpham);
         btnDatmua = (Button) findViewById(R.id.buttonMua);
+
     }
 }
