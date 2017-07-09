@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, TinNhanADActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -204,8 +204,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, DoiMatKhauActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            //Intent intent = new Intent(MainActivity.this, TinNhanNDActivity.class);
-            // startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, TinNhanADActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_send) {
             Intent intent = new Intent(MainActivity.this, DangNhapActivity.class);
             startActivity(intent);

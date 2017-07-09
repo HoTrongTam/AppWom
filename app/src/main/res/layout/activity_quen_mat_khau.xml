@@ -10,14 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#FFFFFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,18 +28,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/tabQuenMatKhau2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:visibility="invisible">
-
                 <include layout="@layout/tab_quenmatkhau2" />
             </LinearLayout>
         </FrameLayout>
-
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

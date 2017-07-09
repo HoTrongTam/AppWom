@@ -108,6 +108,8 @@
         <activity android:name=".DonhangActivity" />
         <activity android:name=".LichSuDonHangActivity" />
         <activity android:name=".TinNhanNDActivity" />
+        <activity android:name=".TinNhanADActivity" />
+        <activity android:name=".TinNhanADGuiActivity"/>
         <activity android:name=".SuaSanPhamActivity"></activity>
         <activity android:name=".ThemloaispAdmin"></activity>
     </application>

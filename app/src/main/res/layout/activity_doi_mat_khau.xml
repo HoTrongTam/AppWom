@@ -48,8 +48,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
             <EditText
                 android:id="@+id/edtMatKhauMoi_NhapLai"
                 android:layout_width="match_parent"
@@ -59,9 +57,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
-
         </android.support.design.widget.TextInputLayout>
-
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
@@ -76,11 +72,9 @@
             android:text="Medium Text"
             android:id="@+id/txtMaXacNhanDMK"
             android:textColor="#f00"/>
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <EditText
                 android:id="@+id/edtMaXacNhanDMK"
                 android:layout_width="match_parent"
@@ -90,20 +84,17 @@
                 android:maxLines="1"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
                 android:background="#006df0"
                 android:layout_weight="1">
-
                 <Button
                     android:id="@+id/btnXacNhanDMK"
                     style="?android:attr/buttonStyleSmall"
@@ -115,14 +106,12 @@
                     android:textColor="@android:color/white"
                     android:layout_gravity="center"/>
             </FrameLayout>
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#006df0"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1">
-
                 <Button
                     android:id="@+id/btnNhapLaiDMK"
                     style="?android:attr/buttonStyleSmall"
