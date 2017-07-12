@@ -107,7 +107,6 @@ public class Dienthoai extends AppCompatActivity {
                     ThreadData threadData = new ThreadData();
                     threadData.start();
 
-
                 }
 
             }

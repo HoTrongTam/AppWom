@@ -31,6 +31,13 @@ public class DonHang {
         this.trangthai = trangthai;
     }
 
+    public DonHang(int id_donhang, int trangthai, String nguoimua, String anhsanpham) {
+        this.id_donhang = id_donhang;
+        this.trangthai = trangthai;
+        this.nguoimua = nguoimua;
+        this.anhsanpham = anhsanpham;
+    }
+
     public int getTrangthai() {
         return trangthai;
     }

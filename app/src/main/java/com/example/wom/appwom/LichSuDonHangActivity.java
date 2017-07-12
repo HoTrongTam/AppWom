@@ -35,6 +35,8 @@ public class LichSuDonHangActivity extends AppCompatActivity {
 
     ArrayList<DonHang> listDonHang;
     DonHangAdapter donHangAdapter;
+    String id_dh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +46,8 @@ public class LichSuDonHangActivity extends AppCompatActivity {
 
         donHangAdapter = new DonHangAdapter(getApplicationContext(), listDonHang);
         lvDonHang.setAdapter(donHangAdapter);
-
+        id_dh = getIntent().getStringExtra("id_donhang");
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
-
             getDonHang();
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại internet");
@@ -82,16 +83,19 @@ public class LichSuDonHangActivity extends AppCompatActivity {
                             hinhsanpham = jsonObject.getString("hinhsanpham");
                             hoten = jsonObject.getString("hoten");
                             trangthai = jsonObject.getInt("tinhtrangdh");
-                            if (USER_ROLE.equals("1")){
+                            if (USER_ROLE.equals("1")) {
                                 if (USER_LOGIN_ID.equals(id_tk + "")) {
-                                    DonHang donhang = new DonHang(id_donhang,id_sanpham,0,soluong,giasanpham,hoten,tensanpham,hinhsanpham, trangthai);
+                                    DonHang donhang = new DonHang(id_donhang, id_sanpham, 0, soluong, giasanpham, hoten, tensanpham, hinhsanpham, trangthai);
                                     listDonHang.add(donhang);
                                     donHangAdapter.notifyDataSetChanged();
                                 }
-                            }else{
-                                DonHang donhang = new DonHang(id_donhang,id_sanpham,0,soluong,giasanpham,hoten,tensanpham,hinhsanpham, trangthai);
-                                listDonHang.add(donhang);
-                                donHangAdapter.notifyDataSetChanged();
+                            } else {
+                                if (id_dh.equals(""+id_donhang)){
+                                    DonHang donhang = new DonHang(id_donhang, id_sanpham, 0, soluong, giasanpham, hoten, tensanpham, hinhsanpham, trangthai);
+                                    listDonHang.add(donhang);
+                                    donHangAdapter.notifyDataSetChanged();
+                                }
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

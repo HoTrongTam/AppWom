@@ -105,7 +105,14 @@
             android:label="Trang quản lý WOM"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ThemmoiSanphamAdmin" />
-        <activity android:name=".DonhangActivity" />
+        <activity
+            android:name=".DonhangActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="Đơn hàng">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".LichSuDonHangActivity" />
         <activity android:name=".TinNhanNDActivity" />
         <activity android:name=".TinNhanADActivity" />
