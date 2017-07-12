@@ -113,10 +113,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".LichSuDonHangActivity" />
-        <activity android:name=".TinNhanNDActivity" />
-        <activity android:name=".TinNhanADActivity" />
-        <activity android:name=".TinNhanADGuiActivity"/>
+        <activity android:name=".LichSuDonHangActivity" android:label="Chi tiết đơn hàng"/>
+        <activity android:name=".TinNhanNDActivity" android:label="Tin nhắn"/>
+        <activity android:name=".TinNhanADActivity" android:label="Tin nhắn" />
+        <activity android:name=".TinNhanADGuiActivity" android:label="Tin nhắn"/>
         <activity android:name=".SuaSanPhamActivity"></activity>
         <activity android:name=".ThemloaispAdmin"></activity>
     </application>
